@@ -3,7 +3,7 @@ const config = require('./config')
 const mysql = require("mysql2/promise");
 const app = require('./app')
 // Database
-const { createDatabase, createTables, insertData } = require("./db");
+const { createDatabase, createTables} = require("./db");
 
 const dbConfig = config.db;
 

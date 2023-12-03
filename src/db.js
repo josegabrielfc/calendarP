@@ -20,16 +20,6 @@ async function createDatabase() {
   }
 }
 
-const pool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "1Q2W3E4R",
-  database: "calendar",
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
-
 async function createTables(pool) {
   const connection = await pool.getConnection();
   try {
@@ -112,6 +102,16 @@ async function createTables(pool) {
     connection.release();
   }
 }
+
+const pool = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "1Q2W3E4R",
+  database: "calendar",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 
 async function insertData(data) {
   const connection = await pool.getConnection();
@@ -200,4 +200,26 @@ async function insertData(data) {
   }
 }
 
-module.exports = { createDatabase, createTables, insertData };
+const funcionSQL = `
+CREATE FUNCTION calcDiffHoras(
+  horaInicio TIME,
+  horaFin TIME
+) RETURNS INT DETERMINISTIC
+BEGIN
+  DECLARE diferencia INT;
+  SET diferencia = TIMESTAMPDIFF(HOUR, horaInicio, horaFin);
+  RETURN diferencia;
+END;
+`;
+async function executeScript() {
+  try {
+    const connection = await pool.getConnection();
+    await connection.query(funcionSQL);
+    connection.release();
+    console.log("La función se creó correctamente.");
+  } catch (error) {
+    console.error("Error al ejecutar el script SQL:", error);
+  }
+}
+
+module.exports = { createDatabase, createTables, insertData, executeScript, pool };

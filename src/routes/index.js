@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { insertData } = require("../db");
+const { insertData, executeScript, pool } = require("../db");
 const auth = require("../middleware/auth");
 const userCtrl = require("../controller/user");
 
@@ -70,6 +70,54 @@ router.post("/update_xlsx", async (req, res) => {
     res.status(200).send("Datos insertados correctamente en la base de datos.");
   } catch (error) {
     console.error("Error en el endpoint /update_xlsx:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+
+router.get("/materias", async (req, res) => {
+  try {
+    const query = "SELECT * FROM calendar.materia";
+    const [materias] = await pool.query(query);
+    res.json({ materias });
+  } catch (error) {
+    console.error("Error al obtener la lista de materias:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.get("/horario", async (req, res) => {
+  try {
+    await executeScript();
+    const query = `
+      SELECT *
+      FROM Horario
+      WHERE calcDiffHoras(hora_inicio, hora_fin) >= 2;
+    `;
+
+    const [rows] = await pool.query(query);
+
+    res.json({ horarios: rows });
+    console.log("Comando ejecutado correctamente en la base de datos.");
+  } catch (error) {
+    console.error("Error en el endpoint /getHorario:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.get("/horario/:materiaId", async (req, res) => {
+  try {
+    const materiaId = req.params.materiaId;
+    const query = `
+      SELECT id, grupo_id, dia, hora_inicio, hora_fin
+      FROM Horario
+      WHERE materia_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+    `;
+    const [horarios] = await pool.query(query, [materiaId]);
+    res.json({ horarios });
+    console.log(horarios);
+  } catch (error) {
+    console.error("Error al obtener los horarios:", error);
     res.status(500).send("Error interno del servidor.");
   }
 });
