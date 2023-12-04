@@ -74,7 +74,6 @@ router.post("/update_xlsx", async (req, res) => {
   }
 });
 
-
 router.get("/materias", async (req, res) => {
   try {
     const query = "SELECT * FROM calendar.materia";
@@ -98,6 +97,7 @@ router.get("/horario", async (req, res) => {
     const [rows] = await pool.query(query);
 
     res.json({ horarios: rows });
+    console.log(rows);
     console.log("Comando ejecutado correctamente en la base de datos.");
   } catch (error) {
     console.error("Error en el endpoint /getHorario:", error);
@@ -118,6 +118,150 @@ router.get("/horario/:materiaId", async (req, res) => {
     console.log(horarios);
   } catch (error) {
     console.error("Error al obtener los horarios:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.post("/seleccionar-aleatorio", async (req, res) => {
+  try {
+    // Obtener todas las combinaciones únicas de id_materia y id_grupo desde la tabla Materia_grupo
+    const combinacionesQuery = `
+      SELECT DISTINCT materia_id, grupo_id
+      FROM Materia_grupo;
+    `;
+
+    const [combinaciones] = await pool.query(combinacionesQuery);
+
+    // Crear un mapa para llevar un seguimiento de los horarios seleccionados
+    const horariosSeleccionados = new Map();
+
+    // Iterar sobre las combinaciones únicas de id_materia e id_grupo
+    for (const combinacion of combinaciones) {
+      const { materia_id, grupo_id } = combinacion;
+
+      // Obtener todos los horarios válidos para la materia y grupo actual
+      const horariosQuery = `
+        SELECT *
+        FROM Horario
+        WHERE materia_id = ? AND grupo_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+      `;
+
+      const [horarios] = await pool.query(horariosQuery, [
+        materia_id,
+        grupo_id,
+      ]);
+
+      // Si hay horarios disponibles, seleccionar aleatoriamente uno
+      if (horarios.length > 0) {
+        const horarioSeleccionado =
+          horarios[Math.floor(Math.random() * horarios.length)];
+
+        // Agregar el horario seleccionado al mapa
+        horariosSeleccionados.set(
+          `${materia_id}-${grupo_id}`,
+          horarioSeleccionado
+        );
+      }
+    }
+
+    // Construir un array de horarios seleccionados desde el mapa
+    const horariosSeleccionadosArray = Array.from(
+      horariosSeleccionados.values()
+    );
+
+    // Insertar los horarios seleccionados en la tabla Seleccionar
+    for (const horario of horariosSeleccionadosArray) {
+      const insertSeleccionQuery = `
+        INSERT INTO Seleccionar (horario_id, id_materia, grupo_id, dia, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?, ?);
+        `;
+
+      await pool.query(insertSeleccionQuery, [
+        horario.id,
+        horario.materia_id,
+        horario.grupo_id,
+        horario.dia,
+        horario.hora_inicio,
+        horario.hora_fin,
+      ]);
+    }
+
+    // Enviar la respuesta JSON con los horarios seleccionados
+    res.json({ horariosSeleccionados: horariosSeleccionadosArray });
+    //res.status(200).send("Horarios seleccionados aleatoriamente y guardados correctamente.");
+  } catch (error) {
+    console.error("Error en el endpoint /seleccionar-aleatorio:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.post("/select-horario", async (req, res) => {
+  try {
+    const { id_materia, grupo_id, dia, hora_inicio, hora_fin } = req.body;
+
+    /*const insertHorarioQuery = `
+      INSERT INTO Horario (materia_id, grupo_id, dia, hora_inicio, hora_fin)
+      VALUES (?, ?, ?, ?, ?);
+    `;
+    const [horarioResult] = await pool.query(insertHorarioQuery, [id_materia, grupo_id, dia, hora_inicio, hora_fin]);
+    const horarioId = horarioResult.insertId;*/
+
+    const insertSeleccionQuery = `
+      INSERT INTO Seleccionar (horario_id, id_materia, grupo_id, dia, hora_inicio, hora_fin)
+      VALUES (?, ?, ?, ?, ?, ?);
+    `;
+    await pool.query(insertSeleccionQuery, [
+      horarioId,
+      id_materia,
+      grupo_id,
+      dia,
+      hora_inicio,
+      hora_fin,
+    ]);
+
+    res.status(200).send("Horario seleccionado y guardado correctamente.");
+  } catch (error) {
+    console.error("Error al seleccionar y guardar el horario:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.delete("/delete-select-horario/:id_materia", async (req, res) => {
+  try {
+    const id_materia = req.params.id_materia;
+
+    // Obtener el horario_id asociado a la materia
+    const getHorarioIdQuery =
+      "SELECT horario_id FROM Seleccionar WHERE id_materia = ?";
+    const [result] = await pool.query(getHorarioIdQuery, [id_materia]);
+
+    if (result.length === 0) {
+      res
+        .status(404)
+        .send(
+          "No se encontró ninguna selección de horario para la materia proporcionada."
+        );
+      return;
+    }
+
+    // Eliminar la entrada en la tabla Seleccionar
+    const deleteSeleccionQuery = "DELETE FROM Seleccionar WHERE id_materia = ?";
+    await pool.query(deleteSeleccionQuery, [id_materia]);
+
+    res.status(200).send("Horario eliminado correctamente.");
+  } catch (error) {
+    console.error("Error al eliminar el horario:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.get("/selecciones", async (req, res) => {
+  try {
+    const query = "SELECT * FROM Seleccionar";
+    const [selecciones] = await pool.query(query);
+
+    res.json({ selecciones });
+  } catch (error) {
+    console.error("Error al obtener la lista de selecciones:", error);
     res.status(500).send("Error interno del servidor.");
   }
 });

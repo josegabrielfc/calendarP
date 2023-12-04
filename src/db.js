@@ -63,7 +63,18 @@ async function createTables(pool) {
         FOREIGN KEY (grupo_id) REFERENCES Materia_grupo(grupo_id)
       )
     `);
-
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS Seleccionar (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        horario_id INT,
+        FOREIGN KEY (horario_id) REFERENCES Horario(id),
+        id_materia INT,
+        grupo_id CHAR(1),
+        dia VARCHAR(50),
+        hora_inicio TIME,
+        hora_fin TIME
+      )
+    `);
     await connection.query(`
       CREATE TABLE IF NOT EXISTS Document (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -201,7 +212,7 @@ async function insertData(data) {
 }
 
 const funcionSQL = `
-CREATE FUNCTION calcDiffHoras(
+CREATE FUNCTION IF NOT EXISTS calcDiffHoras(
   horaInicio TIME,
   horaFin TIME
 ) RETURNS INT DETERMINISTIC
@@ -222,4 +233,10 @@ async function executeScript() {
   }
 }
 
-module.exports = { createDatabase, createTables, insertData, executeScript, pool };
+module.exports = {
+  createDatabase,
+  createTables,
+  insertData,
+  executeScript,
+  pool,
+};
