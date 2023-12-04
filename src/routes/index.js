@@ -63,10 +63,8 @@ router.post("/update_xlsx", async (req, res) => {
 
     // Filtrar para eliminar los objetos que solo tienen Horario
     data = data.filter((item) => item.Materia);
-    // Insertar datos en la base de datos utilizando la función de db.js
     await insertData(data);
     //console.log(data);
-    // Enviar respuesta al cliente
     res.status(200).send("Datos insertados correctamente en la base de datos.");
   } catch (error) {
     console.error("Error en el endpoint /update_xlsx:", error);
@@ -132,7 +130,6 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
 
     const [combinaciones] = await pool.query(combinacionesQuery);
 
-    // Crear un mapa para llevar un seguimiento de los horarios seleccionados
     const horariosSeleccionados = new Map();
 
     // Iterar sobre las combinaciones únicas de id_materia e id_grupo
@@ -164,10 +161,7 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
       }
     }
 
-    // Construir un array de horarios seleccionados desde el mapa
-    const horariosSeleccionadosArray = Array.from(
-      horariosSeleccionados.values()
-    );
+    const horariosSeleccionadosArray = Array.from(horariosSeleccionados.values());
 
     // Insertar los horarios seleccionados en la tabla Seleccionar
     for (const horario of horariosSeleccionadosArray) {
@@ -185,7 +179,6 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
       ]);
     }
 
-    // Enviar la respuesta JSON con los horarios seleccionados
     res.json({ horariosSeleccionados: horariosSeleccionadosArray });
     //res.status(200).send("Horarios seleccionados aleatoriamente y guardados correctamente.");
   } catch (error) {
