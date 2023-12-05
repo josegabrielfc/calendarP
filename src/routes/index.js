@@ -171,12 +171,58 @@ router.put("/horario/:materiaId/:grupoId/:oldHorarioId/:newHorarioId", async (re
 
     await pool.query(updateQuery, [newHorarioId, dia, hora_inicio, hora_fin, oldHorarioId, materiaId, grupoId]);
 
-    res.json({ success: true, message: "Información actualizada correctamente." });
+    const selectAfterUpdateQuery = `
+      SELECT *
+      FROM Seleccionar
+      WHERE materia_id = ? AND grupo_id = ? AND horario_id = ?;
+    `;
+
+    const [resultAfterUpdate] = await pool.query(selectAfterUpdateQuery, [materiaId, grupoId, newHorarioId]);
+
+    const horario = resultAfterUpdate[0];
+
+    res.json({ horario });
+    //res.json({ success: true, message: "Información actualizada correctamente." });
   } catch (error) {
     console.error("Error al actualizar la información:", error);
     res.status(500).send("Error interno del servidor.");
   }
 });
+
+/*
+router.put("/horario/:materiaId/:grupoId/:horarioId", async (req, res) => {
+  try {
+    const { materiaId, grupoId, horarioId } = req.params;
+    const { dia, hora_inicio, hora_fin } = req.body;
+
+    // Verificar que el horario seleccionado pertenezca a la materia y grupo especificados
+    const checkQuery = `
+      SELECT id
+      FROM Horario
+      WHERE id = ? AND materia_id = ? AND grupo_id = ?;
+    `;
+
+    const [checkResult] = await pool.query(checkQuery, [horarioId, materiaId, grupoId]);
+
+    if (checkResult.length === 0) {
+      return res.status(400).json({ error: "El horario seleccionado no pertenece a la materia y grupo especificados." });
+    }
+
+    // Realizar la actualización en la tabla Seleccionar
+    const updateQuery = `
+      UPDATE Seleccionar
+      SET horario_id = ?, dia = ?, hora_inicio = ?, hora_fin = ?
+      WHERE horario_id = ? AND materia_id = ? AND grupo_id = ?;
+    `;
+
+    await pool.query(updateQuery, [horarioId, dia, hora_inicio, hora_fin, materiaId, grupoId, horarioId]);
+
+    res.json({ success: true, message: "Información actualizada correctamente." });
+  } catch (error) {
+    console.error("Error al actualizar la información:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});*/
 
 
 router.post("/seleccionar-aleatorio", async (req, res) => {

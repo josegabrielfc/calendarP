@@ -1,0 +1,11 @@
+{
+    "horario": {
+        "id": 2,
+        "horario_id": 6,
+        "materia_id": 1155101,
+        "grupo_id": "A",
+        "dia": "JUEVES",
+        "hora_inicio": "10:00:00",
+        "hora_fin": "12:00:00"
+    }
+}
