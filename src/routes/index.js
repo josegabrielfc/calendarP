@@ -141,6 +141,44 @@ router.get("/horario/:materiaId/:grupoId", async (req, res) => {
   }
 });
 
+//Editar horario segun materia y grupo
+router.put("/horario/:materiaId/:grupoId/:oldHorarioId/:newHorarioId", async (req, res) => {
+  try {
+    const { materiaId, grupoId, oldHorarioId, newHorarioId } = req.params;
+    //const { dia, hora_inicio, hora_fin } = req.body;
+
+    // Consulta para obtener los valores actuales del horario
+    const selectQuery = `
+      SELECT dia, hora_inicio, hora_fin
+      FROM Horario
+      WHERE id = ? AND materia_id = ? AND grupo_id = ?;
+    `;
+
+    const [result] = await pool.query(selectQuery, [newHorarioId, materiaId, grupoId]);
+
+    if (result.length === 0) {
+      return res.status(400).json({ error: "El horario seleccionado no pertenece a la materia y grupo especificados." });
+    }
+
+    const { dia, hora_inicio, hora_fin } = result[0];
+
+    // Realizar la actualización en la tabla Seleccionar
+    const updateQuery = `
+      UPDATE Seleccionar
+      SET horario_id = ?, dia = ?, hora_inicio = ?, hora_fin = ?
+      WHERE horario_id = ? AND materia_id = ? AND grupo_id = ?;
+    `;
+
+    await pool.query(updateQuery, [newHorarioId, dia, hora_inicio, hora_fin, oldHorarioId, materiaId, grupoId]);
+
+    res.json({ success: true, message: "Información actualizada correctamente." });
+  } catch (error) {
+    console.error("Error al actualizar la información:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+
 router.post("/seleccionar-aleatorio", async (req, res) => {
   try {
     // Obtener todas las combinaciones únicas de materia_id y grupo_id desde la tabla Materia_grupo
