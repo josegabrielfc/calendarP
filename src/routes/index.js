@@ -3,6 +3,7 @@ const router = Router();
 const { insertData, executeScript, pool } = require("../db");
 const auth = require("../middleware/auth");
 const userCtrl = require("../controller/user");
+const moment = require("moment");
 
 router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
@@ -229,7 +230,11 @@ router.post("/select-horario", async (req, res) => {
 
     // Verificar si el horario está disponible
     if (!horarioDisponible) {
-      res.status(404).send("El horario seleccionado no está disponible para la materia y grupo específicos.");
+      res
+        .status(404)
+        .send(
+          "El horario seleccionado no está disponible para la materia y grupo específicos."
+        );
       return;
     }
 
@@ -254,30 +259,47 @@ router.post("/select-horario", async (req, res) => {
   }
 });
 
-router.delete("/delete-select-horario/:materiaId/:grupoId", async (req, res) => {
-  try {
-    const { materiaId, grupoId } = req.params;
+router.delete(
+  "/delete-select-horario/:materiaId/:grupoId",
+  async (req, res) => {
+    try {
+      const { materiaId, grupoId } = req.params;
 
-    const getHorarioIdQuery =
-      "SELECT horario_id FROM Seleccionar WHERE materia_id = ? AND grupo_id = ?";
-    const [result] = await pool.query(getHorarioIdQuery, [materiaId, grupoId]);
+      const getHorarioIdQuery =
+        "SELECT horario_id FROM Seleccionar WHERE materia_id = ? AND grupo_id = ?";
+      const [result] = await pool.query(getHorarioIdQuery, [
+        materiaId,
+        grupoId,
+      ]);
 
-    if (result.length === 0) {
-      res.status(404).send(
-          "No se encontró ninguna selección de horario para la materia proporcionada."
+      if (result.length === 0) {
+        res
+          .status(404)
+          .send(
+            "No se encontró ninguna selección de horario para la materia proporcionada."
+          );
+        return;
+      }
+
+      const deleteSeleccionQuery =
+        "DELETE FROM Seleccionar WHERE materia_id = ? AND grupo_id = ?";
+      await pool.query(deleteSeleccionQuery, [materiaId, grupoId]);
+
+      res
+        .status(200)
+        .send(
+          "Horario de la materia " +
+            materiaId +
+            ", grupo " +
+            grupoId +
+            " eliminado correctamente."
         );
-      return;
+    } catch (error) {
+      console.error("Error al eliminar el horario:", error);
+      res.status(500).send("Error interno del servidor.");
     }
-
-    const deleteSeleccionQuery = "DELETE FROM Seleccionar WHERE materia_id = ? AND grupo_id = ?";
-    await pool.query(deleteSeleccionQuery, [materiaId, grupoId]);
-
-    res.status(200).send("Horario de la materia "+materiaId+", grupo "+grupoId+" eliminado correctamente.");
-  } catch (error) {
-    console.error("Error al eliminar el horario:", error);
-    res.status(500).send("Error interno del servidor.");
   }
-});
+);
 
 router.get("/selecciones", async (req, res) => {
   try {
@@ -287,6 +309,44 @@ router.get("/selecciones", async (req, res) => {
     res.json({ selecciones });
   } catch (error) {
     console.error("Error al obtener la lista de selecciones:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.get("/horario-dia/:dia", async (req, res) => {
+  try {
+    const day = req.params.dia;
+    const query = "SELECT * FROM calendar.seleccionar WHERE dia = ?";
+    const [selecciones] = await pool.query(query, [day]);
+    res.json({ selecciones });
+  } catch (error) {
+    console.error("Error al obtener la lista del dia " + day + " :", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+//De acuerdo a las fecha de Inicio de Previo y Fecha de Fin (Siempre debe haber un rango de 2 semanas)
+//El endpoint ya genera los horarios distribuidos en las 2 semanas, pero sin considerar las fechas de inicio y fin
+router.get("/horarios-semanas", async (req, res) => {
+  try {
+    const days = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"];
+    const horariosPrimeraSemana = [];
+    const horariosSegundaSemana = [];
+
+    for (const day of days) {
+      const query = "SELECT * FROM calendar.seleccionar WHERE dia = ?";
+      const [selecciones] = await pool.query(query, [day]);
+
+      const mitad = Math.ceil(selecciones.length / 2);
+      horariosPrimeraSemana.push(...selecciones.slice(0, mitad));
+      horariosSegundaSemana.push(...selecciones.slice(mitad));
+    }
+
+    //console.log(horariosPrimeraSemana.length);
+    //console.log(horariosSegundaSemana.length);
+    res.json({ horariosPrimeraSemana, horariosSegundaSemana });
+  } catch (error) {
+    console.error("Error al obtener los horarios entre semanas:", error);
     res.status(500).send("Error interno del servidor.");
   }
 });
