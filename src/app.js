@@ -1,7 +1,5 @@
 const express = require("express");
 const morgan = require("morgan"); //Se utiliza para el registro (logging) de solicitudes HTTP
-//const exceljs = require("exceljs");
-//const multer = require("multer"); //Se utiliza para manejar la carga de archivos en formularios HTML
 
 const app = express();
 const api = require("./routes/index");

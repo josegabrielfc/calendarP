@@ -1,10 +1,15 @@
+const config = require('dotenv');
+
+config.config();
+
 module.exports = {
   port: process.env.PORT || 3001,
   db: {
     host: process.env.DB_HOST || "localhost",
     user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "1Q2W3E4R",
-    database: process.env.DB_NAME || "calendar",
+    password: process.env.DB_PASSWORD || "password",
+    database: process.env.DB_DATABASE || "database",
+    port: process.env.DB_PORT || "3306",
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
