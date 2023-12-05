@@ -1,0 +1,932 @@
+{
+  "horariosSeleccionados": [
+    {
+      "id": 202,
+      "materia_id": 1151009,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "18:00:00",
+      "hora_fin": "20:00:00"
+    },
+    {
+      "id": 5,
+      "materia_id": 1155101,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 57,
+      "materia_id": 1155102,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 204,
+      "materia_id": 1155104,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 80,
+      "materia_id": 1155105,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 176,
+      "materia_id": 1155106,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 144,
+      "materia_id": 1155201,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 39,
+      "materia_id": 1155202,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 86,
+      "materia_id": 1155203,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 42,
+      "materia_id": 1155204,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 183,
+      "materia_id": 1155206,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 66,
+      "materia_id": 1155301,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 114,
+      "materia_id": 1155303,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 107,
+      "materia_id": 1155304,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 16,
+      "materia_id": 1155305,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 185,
+      "materia_id": 1155306,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "12:00:00",
+      "hora_fin": "14:00:00"
+    },
+    {
+      "id": 156,
+      "materia_id": 1155401,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 14,
+      "materia_id": 1155402,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 147,
+      "materia_id": 1155403,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 48,
+      "materia_id": 1155404,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 121,
+      "materia_id": 1155405,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 77,
+      "materia_id": 1155501,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 98,
+      "materia_id": 1155502,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "07:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 154,
+      "materia_id": 1155503,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "16:00:00",
+      "hora_fin": "18:00:00"
+    },
+    {
+      "id": 141,
+      "materia_id": 1155504,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 173,
+      "materia_id": 1155506,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 95,
+      "materia_id": 1155511,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 71,
+      "materia_id": 1155513,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "11:00:00",
+      "hora_fin": "13:00:00"
+    },
+    {
+      "id": 37,
+      "materia_id": 1155515,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 161,
+      "materia_id": 1155516,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 1,
+      "materia_id": 1155523,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 151,
+      "materia_id": 1155604,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 137,
+      "materia_id": 1155605,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 192,
+      "materia_id": 1155606,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 184,
+      "materia_id": 1155607,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "11:00:00",
+      "hora_fin": "13:00:00"
+    },
+    {
+      "id": 24,
+      "materia_id": 1155608,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 191,
+      "materia_id": 1155609,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 138,
+      "materia_id": 1155611,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "16:00:00",
+      "hora_fin": "18:00:00"
+    },
+    {
+      "id": 74,
+      "materia_id": 1155615,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "15:00:00",
+      "hora_fin": "18:00:00"
+    },
+    {
+      "id": 50,
+      "materia_id": 1155704,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 101,
+      "materia_id": 1155705,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 68,
+      "materia_id": 1155706,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 172,
+      "materia_id": 1155707,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 149,
+      "materia_id": 1155708,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "07:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 113,
+      "materia_id": 1155712,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "13:00:00"
+    },
+    {
+      "id": 134,
+      "materia_id": 1155713,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 148,
+      "materia_id": 1155714,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "07:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 194,
+      "materia_id": 1155804,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 22,
+      "materia_id": 1155805,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 175,
+      "materia_id": 1155808,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 152,
+      "materia_id": 1155809,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 171,
+      "materia_id": 1155905,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "13:00:00"
+    },
+    {
+      "id": 99,
+      "materia_id": 1155908,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 133,
+      "materia_id": 1155909,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "14:00:00",
+      "hora_fin": "18:00:00"
+    },
+    {
+      "id": 69,
+      "materia_id": 1156703,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "13:00:00"
+    },
+    {
+      "id": 170,
+      "materia_id": 1156802,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "07:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 125,
+      "materia_id": 1156804,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "09:00:00"
+    },
+    {
+      "id": 55,
+      "materia_id": 1156805,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 104,
+      "materia_id": 1156901,
+      "grupo_id": "A",
+      "dia": "LUNES",
+      "hora_inicio": "07:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 130,
+      "materia_id": 1156903,
+      "grupo_id": "A",
+      "dia": "VIERNES",
+      "hora_inicio": "14:00:00",
+      "hora_fin": "16:00:00"
+    },
+    {
+      "id": 36,
+      "materia_id": 1157003,
+      "grupo_id": "A",
+      "dia": "SABADO",
+      "hora_inicio": "07:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 139,
+      "materia_id": 1157004,
+      "grupo_id": "A",
+      "dia": "MIERCOLES",
+      "hora_inicio": "09:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 29,
+      "materia_id": 1157005,
+      "grupo_id": "A",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 102,
+      "materia_id": 1157007,
+      "grupo_id": "A",
+      "dia": "MARTES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 179,
+      "materia_id": 1155101,
+      "grupo_id": "B",
+      "dia": "MIERCOLES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 8,
+      "materia_id": 1155102,
+      "grupo_id": "B",
+      "dia": "MIERCOLES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 182,
+      "materia_id": 1155104,
+      "grupo_id": "B",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 33,
+      "materia_id": 1155105,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 142,
+      "materia_id": 1155106,
+      "grupo_id": "B",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 4,
+      "materia_id": 1155201,
+      "grupo_id": "B",
+      "dia": "MIERCOLES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 10,
+      "materia_id": 1155202,
+      "grupo_id": "B",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 81,
+      "materia_id": 1155203,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 90,
+      "materia_id": 1155204,
+      "grupo_id": "B",
+      "dia": "VIERNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 61,
+      "materia_id": 1155206,
+      "grupo_id": "B",
+      "dia": "VIERNES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 164,
+      "materia_id": 1155301,
+      "grupo_id": "B",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 122,
+      "materia_id": 1155303,
+      "grupo_id": "B",
+      "dia": "LUNES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 44,
+      "materia_id": 1155304,
+      "grupo_id": "B",
+      "dia": "VIERNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 97,
+      "materia_id": 1155305,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 62,
+      "materia_id": 1155306,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 93,
+      "materia_id": 1155401,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 64,
+      "materia_id": 1155402,
+      "grupo_id": "B",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 35,
+      "materia_id": 1155403,
+      "grupo_id": "B",
+      "dia": "VIERNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 12,
+      "materia_id": 1155404,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 72,
+      "materia_id": 1155405,
+      "grupo_id": "B",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 168,
+      "materia_id": 1155501,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 84,
+      "materia_id": 1155502,
+      "grupo_id": "B",
+      "dia": "MARTES",
+      "hora_inicio": "15:00:00",
+      "hora_fin": "18:00:00"
+    },
+    {
+      "id": 51,
+      "materia_id": 1155503,
+      "grupo_id": "B",
+      "dia": "MARTES",
+      "hora_inicio": "16:00:00",
+      "hora_fin": "18:00:00"
+    },
+    {
+      "id": 92,
+      "materia_id": 1155504,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 30,
+      "materia_id": 1155506,
+      "grupo_id": "B",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 46,
+      "materia_id": 1155604,
+      "grupo_id": "B",
+      "dia": "MARTES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 18,
+      "materia_id": 1155605,
+      "grupo_id": "B",
+      "dia": "LUNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 20,
+      "materia_id": 1155606,
+      "grupo_id": "B",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 189,
+      "materia_id": 1155608,
+      "grupo_id": "B",
+      "dia": "MARTES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 38,
+      "materia_id": 1155609,
+      "grupo_id": "B",
+      "dia": "LUNES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 76,
+      "materia_id": 1155704,
+      "grupo_id": "B",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 132,
+      "materia_id": 1155705,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 70,
+      "materia_id": 1155706,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 200,
+      "materia_id": 1155708,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "13:00:00"
+    },
+    {
+      "id": 109,
+      "materia_id": 1155804,
+      "grupo_id": "B",
+      "dia": "MIERCOLES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 157,
+      "materia_id": 1155808,
+      "grupo_id": "B",
+      "dia": "MARTES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 143,
+      "materia_id": 1155809,
+      "grupo_id": "B",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 85,
+      "materia_id": 1155909,
+      "grupo_id": "B",
+      "dia": "VIERNES",
+      "hora_inicio": "14:00:00",
+      "hora_fin": "18:00:00"
+    },
+    {
+      "id": 177,
+      "materia_id": 1155102,
+      "grupo_id": "C",
+      "dia": "MARTES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 187,
+      "materia_id": 1155203,
+      "grupo_id": "C",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 163,
+      "materia_id": 1155204,
+      "grupo_id": "C",
+      "dia": "MIERCOLES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 197,
+      "materia_id": 1155303,
+      "grupo_id": "C",
+      "dia": "LUNES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 59,
+      "materia_id": 1155304,
+      "grupo_id": "C",
+      "dia": "MIERCOLES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 160,
+      "materia_id": 1155503,
+      "grupo_id": "C",
+      "dia": "MIERCOLES",
+      "hora_inicio": "14:00:00",
+      "hora_fin": "16:00:00"
+    },
+    {
+      "id": 105,
+      "materia_id": 1155504,
+      "grupo_id": "C",
+      "dia": "MARTES",
+      "hora_inicio": "18:00:00",
+      "hora_fin": "21:00:00"
+    },
+    {
+      "id": 167,
+      "materia_id": 1155605,
+      "grupo_id": "C",
+      "dia": "VIERNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 53,
+      "materia_id": 1155606,
+      "grupo_id": "C",
+      "dia": "MARTES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 196,
+      "materia_id": 1155706,
+      "grupo_id": "C",
+      "dia": "LUNES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 119,
+      "materia_id": 1155203,
+      "grupo_id": "D",
+      "dia": "JUEVES",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "12:00:00"
+    },
+    {
+      "id": 111,
+      "materia_id": 1155503,
+      "grupo_id": "D",
+      "dia": "MIERCOLES",
+      "hora_inicio": "14:00:00",
+      "hora_fin": "16:00:00"
+    },
+    {
+      "id": 126,
+      "materia_id": 1155303,
+      "grupo_id": "E",
+      "dia": "LUNES",
+      "hora_inicio": "06:00:00",
+      "hora_fin": "08:00:00"
+    },
+    {
+      "id": 26,
+      "materia_id": 1155503,
+      "grupo_id": "E",
+      "dia": "LUNES",
+      "hora_inicio": "14:00:00",
+      "hora_fin": "16:00:00"
+    }
+  ]
+}

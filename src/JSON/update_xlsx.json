@@ -1,0 +1,1191 @@
+{
+  "data": [
+    {
+      "Materia": "1155523",
+      "Nombre": "ANALíTICA DE DATOS EN MODELOS",
+      "Código Docente": 6079,
+      "Horario": [
+        "MARTES 06:00-08:00 SB401",
+        "MIERCOLES 07:00-08:00 SB403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155201",
+      "Nombre": "CALCULO INTEGRAL",
+      "Código Docente": 7491,
+      "Horario": [
+        "LUNES 06:00-08:00 SA210",
+        "MIERCOLES 06:00-08:00 SA201"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155101",
+      "Nombre": "CALCULO DIFERENCIAL",
+      "Código Docente": 5159,
+      "Horario": [
+        "LUNES 06:00-08:00 SA312",
+        "JUEVES 10:00-12:00 FU102"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155102",
+      "Nombre": "MATEMATICAS DISCRETAS",
+      "Código Docente": 1496,
+      "Horario": [
+        "MARTES 11:00-12:00 SB402",
+        "MIERCOLES 08:00-10:00 SB401"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155202",
+      "Nombre": "ALGEBRA LINEAL",
+      "Código Docente": 1517,
+      "Horario": [
+        "JUEVES 08:00-09:00 SE102",
+        "VIERNES 08:00-10:00 SE103"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155209",
+      "Nombre": "SEMINARIO INTEGRADOR I",
+      "Código Docente": 6076,
+      "Horario": [
+        "LUNES 10:00-11:00 SC402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155404",
+      "Nombre": "ANALISIS DE ALGORITMOS",
+      "Código Docente": 1995,
+      "Horario": [
+        "JUEVES 10:00-12:00 SA403",
+        "VIERNES 08:00-09:00 SA402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155402",
+      "Nombre": "PROBABILIDAD Y ESTADISTICA",
+      "Código Docente": 7256,
+      "Horario": [
+        "JUEVES 06:00-08:00 AG203",
+        "VIERNES 06:00-08:00 SE304"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155305",
+      "Nombre": "PROGRAMACION ORIENTADA A OBJET",
+      "Código Docente": 4608,
+      "Horario": [
+        "MARTES 10:00-12:00 SA414",
+        "JUEVES 08:00-10:00 SB401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155605",
+      "Nombre": "BASES DE DATOS",
+      "Código Docente": 5372,
+      "Horario": [
+        "LUNES 08:00-10:00 SA403",
+        "VIERNES 08:00-10:00 SA403"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155606",
+      "Nombre": "PROGRAMACION WEB",
+      "Código Docente": 5372,
+      "Horario": [
+        "LUNES 10:00-12:00 SA414",
+        "VIERNES 10:00-12:00 SA411"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155805",
+      "Nombre": "INGENIERIA DE SOFTWARE",
+      "Código Docente": 1713,
+      "Horario": [
+        "MARTES 06:00-08:00 SA401",
+        "JUEVES 06:00-08:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155608",
+      "Nombre": "PLANEACION ESTRATEGICA DE SIST",
+      "Código Docente": 6209,
+      "Horario": [
+        "LUNES 10:00-12:00 SB403",
+        "MIERCOLES 08:00-09:00 SB402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155503",
+      "Nombre": "ELECTRONICA",
+      "Código Docente": 6398,
+      "Horario": [
+        "LUNES 14:00-16:00 AG206",
+        "JUEVES 14:00-16:00 LG110"
+      ],
+      "Grupo": "E"
+    },
+    {
+      "Materia": "1156001",
+      "Nombre": "PROYECTO DE GRADO",
+      "Horario": [],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1157005",
+      "Nombre": "MINERIA DE DATOS",
+      "Código Docente": 1496,
+      "Horario": [
+        "MARTES 08:00-09:00 SA414",
+        "JUEVES 08:00-10:00 SA402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155506",
+      "Nombre": "SEMINARIO DE INVESTIGACION II",
+      "Código Docente": 5096,
+      "Horario": [
+        "MIERCOLES 10:00-12:00 SC402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155108",
+      "Nombre": "INTRO VIDA UNIVERSITARIA",
+      "Código Docente": 2517,
+      "Horario": [
+        "MIERCOLES 10:00-11:00 SA312"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155105",
+      "Nombre": "INTRODUCCION ING SISTEMAS",
+      "Código Docente": 6693,
+      "Horario": [
+        "MARTES 09:00-10:00 SA202",
+        "JUEVES 08:00-10:00 SF403"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155403",
+      "Nombre": "ONDAS Y PARTICULAS",
+      "Código Docente": 5981,
+      "Horario": [
+        "MIERCOLES 09:00-10:00 SA204",
+        "VIERNES 10:00-12:00 SA210"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1157003",
+      "Nombre": "INFORMATICA JURIDICA",
+      "Código Docente": 4186,
+      "Horario": [
+        "SABADO 07:00-10:00 SB401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155515",
+      "Nombre": "PSICOLOGIA INDUSTRIAL",
+      "Código Docente": 2083,
+      "Horario": [
+        "LUNES 10:00-12:00 SA311"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155609",
+      "Nombre": "SEMINARIO INTEGRADOR II",
+      "Código Docente": 5096,
+      "Horario": [
+        "LUNES 10:00-12:00 SA401"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155202",
+      "Nombre": "ALGEBRA LINEAL",
+      "Código Docente": 2330,
+      "Horario": [
+        "JUEVES 08:00-10:00 SC401",
+        "VIERNES 08:00-09:00 SA207"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155204",
+      "Nombre": "PROGRAMACION ORIENTADA A OBJET",
+      "Código Docente": 3556,
+      "Horario": [
+        "LUNES 10:00-12:00 SB404",
+        "MARTES 08:00-10:00 SB402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155304",
+      "Nombre": "ESTRUCTURAS DE DATOS",
+      "Código Docente": 3852,
+      "Horario": [
+        "MIERCOLES 08:00-10:00 SA401",
+        "VIERNES 10:00-12:00 SB402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155604",
+      "Nombre": "SISTEMAS OPERATIVOS",
+      "Código Docente": 3325,
+      "Horario": [
+        "LUNES 07:00-08:00 SC401",
+        "MARTES 06:00-08:00 SA402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155404",
+      "Nombre": "ANALISIS DE ALGORITMOS",
+      "Código Docente": 4041,
+      "Horario": [
+        "MARTES 09:00-10:00 SC402",
+        "MIERCOLES 10:00-12:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155704",
+      "Nombre": "TEORIA GENERAL DE LAS COMUNICA",
+      "Código Docente": 1111,
+      "Horario": [
+        "LUNES 10:00-11:00 SA412",
+        "VIERNES 08:00-10:00 SA412"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155503",
+      "Nombre": "ELECTRONICA",
+      "Código Docente": 6398,
+      "Horario": [
+        "MARTES 16:00-18:00 SB402",
+        "MIERCOLES 16:00-18:00 LG108"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155606",
+      "Nombre": "PROGRAMACION WEB",
+      "Código Docente": 6529,
+      "Horario": [
+        "MARTES 08:00-10:00 SA411",
+        "JUEVES 10:00-12:00 SC401"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1156805",
+      "Nombre": "GERENCIA Y TECNOLOGIA",
+      "Código Docente": 7338,
+      "Horario": [
+        "LUNES 10:00-12:00 SB402",
+        "JUEVES 09:00-10:00 SA401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155102",
+      "Nombre": "MATEMATICAS DISCRETAS",
+      "Código Docente": 4412,
+      "Horario": [
+        "MARTES 10:00-12:00 SA402",
+        "MIERCOLES 09:00-10:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155304",
+      "Nombre": "ESTRUCTURAS DE DATOS",
+      "Código Docente": 4608,
+      "Horario": [
+        "MIERCOLES 08:00-10:00 SA411",
+        "VIERNES 10:00-12:00 SC401"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155206",
+      "Nombre": "COMUNICACION II",
+      "Código Docente": 6736,
+      "Horario": [
+        "VIERNES 06:00-08:00 AG304"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155306",
+      "Nombre": "SEMINARIO DE INVESTIGACION I",
+      "Código Docente": 6079,
+      "Horario": [
+        "JUEVES 06:00-08:00 SB403"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155209",
+      "Nombre": "SEMINARIO INTEGRADOR I",
+      "Código Docente": 2049,
+      "Horario": [
+        "MIERCOLES 08:00-09:00 SA403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155402",
+      "Nombre": "PROBABILIDAD Y ESTADISTICA",
+      "Código Docente": 2523,
+      "Horario": [
+        "MARTES 06:00-08:00 SA204",
+        "JUEVES 06:00-08:00 SF303"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155301",
+      "Nombre": "CALCULO VECTORIAL",
+      "Código Docente": 1088,
+      "Horario": [
+        "LUNES 10:00-12:00 SA208",
+        "MIERCOLES 06:00-08:00 SC203"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155706",
+      "Nombre": "SEMINARIO DE INVESTIGACION III",
+      "Código Docente": 3556,
+      "Horario": [
+        "LUNES 08:00-10:00 SB402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1156703",
+      "Nombre": "INTELIGENCIA ARTIFICIAL",
+      "Código Docente": 4412,
+      "Horario": [
+        "VIERNES 10:00-13:00 SB401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155706",
+      "Nombre": "SEMINARIO DE INVESTIGACION III",
+      "Código Docente": 1111,
+      "Horario": [
+        "JUEVES 08:00-10:00 SB404"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155513",
+      "Nombre": "PSICOLOGIA",
+      "Código Docente": 5299,
+      "Horario": [
+        "JUEVES 11:00-13:00 SA208"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155405",
+      "Nombre": "TEORIA DE LA COMPUTACION",
+      "Código Docente": 4412,
+      "Horario": [
+        "MIERCOLES 10:00-12:00 SA402",
+        "JUEVES 10:00-11:00 SA402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155615",
+      "Nombre": "MULTIMEDIA Y REALIDAD MIXTA",
+      "Código Docente": 3561,
+      "Horario": [
+        "VIERNES 15:00-18:00 SA402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155704",
+      "Nombre": "TEORIA GENERAL DE LAS COMUNICA",
+      "Código Docente": 1111,
+      "Horario": [
+        "MARTES 10:00-11:00 SA412",
+        "MIERCOLES 10:00-12:00 SA412"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155501",
+      "Nombre": "ANALISIS NUMERICO",
+      "Código Docente": 2330,
+      "Horario": [
+        "MARTES 08:00-10:00 AG206",
+        "MIERCOLES 07:00-08:00 SA209"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155105",
+      "Nombre": "INTRODUCCION ING SISTEMAS",
+      "Código Docente": 1827,
+      "Horario": [
+        "MARTES 08:00-09:00 SF404",
+        "JUEVES 08:00-10:00 SA403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155203",
+      "Nombre": "FISICA MECANICA",
+      "Código Docente": 1757,
+      "Horario": [
+        "JUEVES 10:00-12:00 TE000",
+        "VIERNES 10:00-11:00 TE000",
+        "VIERNES 07:00-08:00 LBF02"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155502",
+      "Nombre": "INVESTIGACION DE OPERACIONES",
+      "Código Docente": 2248,
+      "Horario": [
+        "MARTES 15:00-18:00 SB403"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155909",
+      "Nombre": "PRACTICA EN ING DE SISTEMAS",
+      "Código Docente": 1178,
+      "Horario": [
+        "VIERNES 14:00-18:00 SA312"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155203",
+      "Nombre": "FISICA MECANICA",
+      "Código Docente": 6143,
+      "Horario": [
+        "JUEVES 10:00-12:00 SE103",
+        "VIERNES 11:00-12:00 LBF01",
+        "VIERNES 10:00-11:00 SA205"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155204",
+      "Nombre": "PROGRAMACION ORIENTADA A OBJET",
+      "Código Docente": 5096,
+      "Horario": [
+        "MIERCOLES 06:00-08:00 SB401",
+        "VIERNES 10:00-12:00 SA403"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155504",
+      "Nombre": "ARQUITECTURA DE COMPUTADORES",
+      "Código Docente": 3325,
+      "Horario": [
+        "MIERCOLES 06:00-07:00 SB404",
+        "JUEVES 06:00-08:00 SB404"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155401",
+      "Nombre": "ECUACIONES DIFERENCIALES",
+      "Código Docente": 2261,
+      "Horario": [
+        "JUEVES 08:00-10:00 SA201",
+        "VIERNES 08:00-10:00 SF301"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155511",
+      "Nombre": "PROBLEMAS SOCIALES DE FRONTERA",
+      "Código Docente": 4784,
+      "Horario": [
+        "JUEVES 08:00-10:00 SA202"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155305",
+      "Nombre": "PROGRAMACION ORIENTADA A OBJET",
+      "Código Docente": 3852,
+      "Horario": [
+        "MARTES 10:00-12:00 SB401",
+        "JUEVES 08:00-10:00 SB403"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155502",
+      "Nombre": "INVESTIGACION DE OPERACIONES",
+      "Código Docente": 2248,
+      "Horario": [
+        "JUEVES 07:00-10:00 SB402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155908",
+      "Nombre": "GESTION DE TICS",
+      "Código Docente": 6209,
+      "Horario": [
+        "MIERCOLES 10:00-12:00 SA311"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155705",
+      "Nombre": "ANALISIS Y DISEÑO DE SISTEMAS",
+      "Código Docente": 1713,
+      "Horario": [
+        "MARTES 08:00-10:00 SA403",
+        "JUEVES 08:00-10:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1157007",
+      "Nombre": "DESARROLLO DE APLICACIONES BAS",
+      "Código Docente": 6076,
+      "Horario": [
+        "MARTES 08:00-10:00 SA401",
+        "MIERCOLES 08:00-09:00 SB404"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1156901",
+      "Nombre": "DESARROLLO DE APLICACIONES MOV",
+      "Código Docente": 4608,
+      "Horario": [
+        "LUNES 07:00-10:00 SA411"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155504",
+      "Nombre": "ARQUITECTURA DE COMPUTADORES",
+      "Código Docente": 3325,
+      "Horario": [
+        "MARTES 18:00-21:00 SB402"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155108",
+      "Nombre": "INTRO VIDA UNIVERSITARIA",
+      "Código Docente": 2517,
+      "Horario": [
+        "MARTES 09:00-10:00 SA311"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155304",
+      "Nombre": "ESTRUCTURAS DE DATOS",
+      "Código Docente": 4041,
+      "Horario": [
+        "MIERCOLES 08:00-10:00 SA402",
+        "VIERNES 10:00-12:00 SA401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155804",
+      "Nombre": "REDES DE COMPUTADORES",
+      "Código Docente": 1111,
+      "Horario": [
+        "MIERCOLES 08:00-10:00 SB403",
+        "VIERNES 10:00-11:00 SA402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155503",
+      "Nombre": "ELECTRONICA",
+      "Código Docente": 6398,
+      "Horario": [
+        "MIERCOLES 14:00-16:00 SB402",
+        "JUEVES 16:00-18:00 LG108"
+      ],
+      "Grupo": "D"
+    },
+    {
+      "Materia": "1155712",
+      "Nombre": "ECONOMIA Y FINANZAS PARA INGEN",
+      "Código Docente": 1856,
+      "Horario": [
+        "MIERCOLES 10:00-13:00 AG302"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155303",
+      "Nombre": "FISICA ELECTROMAGNETICA",
+      "Código Docente": 5610,
+      "Horario": [
+        "LUNES 06:00-08:00 AG304",
+        "MARTES 09:00-10:00 LBF04",
+        "MARTES 08:00-09:00 SG406"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155203",
+      "Nombre": "FISICA MECANICA",
+      "Código Docente": 1726,
+      "Horario": [
+        "LUNES 08:00-09:00 LBF02",
+        "MIERCOLES 08:00-09:00 AG406",
+        "JUEVES 10:00-12:00 AG402"
+      ],
+      "Grupo": "D"
+    },
+    {
+      "Materia": "1155405",
+      "Nombre": "TEORIA DE LA COMPUTACION",
+      "Código Docente": 1872,
+      "Horario": [
+        "LUNES 08:00-09:00 SA401",
+        "MARTES 10:00-12:00 SA403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155303",
+      "Nombre": "FISICA ELECTROMAGNETICA",
+      "Código Docente": 2292,
+      "Horario": [
+        "LUNES 06:00-08:00 AG304",
+        "LUNES 09:00-10:00 LBF04",
+        "MARTES 08:00-09:00 SG406"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1156804",
+      "Nombre": "ADMINISTRACION DE SO DE RED",
+      "Código Docente": 4286,
+      "Horario": [
+        "MARTES 06:00-09:00 SA412"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155303",
+      "Nombre": "FISICA ELECTROMAGNETICA",
+      "Código Docente": 1802,
+      "Horario": [
+        "LUNES 06:00-08:00 SA208",
+        "MARTES 08:00-09:00 AG402",
+        "MIERCOLES 09:00-10:00 LBF05"
+      ],
+      "Grupo": "E"
+    },
+    {
+      "Materia": "1156903",
+      "Nombre": "PROYECTO ACADEMICO (OPCIONAL)",
+      "Código Docente": 1995,
+      "Horario": [
+        "MIERCOLES 14:00-17:00 SA414",
+        "VIERNES 14:00-16:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155705",
+      "Nombre": "ANALISIS Y DISEÑO DE SISTEMAS",
+      "Código Docente": 1713,
+      "Horario": [
+        "MARTES 10:00-12:00 SA401",
+        "JUEVES 10:00-12:00 SA414"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155909",
+      "Nombre": "PRACTICA EN ING DE SISTEMAS",
+      "Código Docente": 1178,
+      "Horario": [
+        "JUEVES 14:00-18:00 SA411"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155713",
+      "Nombre": "BASES DE DATOS AVANZADAS",
+      "Código Docente": 1496,
+      "Horario": [
+        "LUNES 10:00-12:00 SA402",
+        "MARTES 09:00-10:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155605",
+      "Nombre": "BASES DE DATOS",
+      "Código Docente": 1872,
+      "Horario": [
+        "MARTES 08:00-10:00 SA402",
+        "VIERNES 08:00-10:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155611",
+      "Nombre": "PROYECTO SOCIAL EN ING DE SIST",
+      "Código Docente": 1827,
+      "Horario": [
+        "MIERCOLES 16:00-18:00 SA402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1157004",
+      "Nombre": "COMPUTACION EN LA NUBE",
+      "Código Docente": 3556,
+      "Horario": [
+        "MIERCOLES 09:00-12:00 SA403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155504",
+      "Nombre": "ARQUITECTURA DE COMPUTADORES",
+      "Código Docente": 3325,
+      "Horario": [
+        "MIERCOLES 07:00-08:00 SB404",
+        "VIERNES 06:00-08:00 SB404"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155106",
+      "Nombre": "COMUNICACION I",
+      "Código Docente": 2517,
+      "Horario": [
+        "MARTES 06:00-08:00 SE103"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155809",
+      "Nombre": "SEMINARIO INTEGRADOR III",
+      "Código Docente": 1111,
+      "Horario": [
+        "JUEVES 10:00-12:00 SA401"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155201",
+      "Nombre": "CALCULO INTEGRAL",
+      "Código Docente": 7491,
+      "Horario": [
+        "MARTES 06:00-08:00 SA203",
+        "JUEVES 06:00-08:00 SA202"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155403",
+      "Nombre": "ONDAS Y PARTICULAS",
+      "Código Docente": 5610,
+      "Horario": [
+        "MIERCOLES 09:00-10:00 SE103",
+        "VIERNES 10:00-12:00 SP205"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155714",
+      "Nombre": "TRANSFORMACIóN DIGITAL DE LAS",
+      "Código Docente": 7338,
+      "Horario": [
+        "VIERNES 07:00-10:00 SA312"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155708",
+      "Nombre": "ADMINISTRACION DE PROYECTOS IN",
+      "Código Docente": 2049,
+      "Horario": [
+        "VIERNES 07:00-10:00 SB403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155604",
+      "Nombre": "SISTEMAS OPERATIVOS",
+      "Código Docente": 4041,
+      "Horario": [
+        "MARTES 10:00-11:00 SA411",
+        "JUEVES 10:00-12:00 SA411"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155809",
+      "Nombre": "SEMINARIO INTEGRADOR III",
+      "Código Docente": 1872,
+      "Horario": [
+        "JUEVES 10:00-12:00 SB402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155503",
+      "Nombre": "ELECTRONICA",
+      "Código Docente": 6398,
+      "Horario": [
+        "LUNES 16:00-18:00 LG108",
+        "MARTES 16:00-18:00 SB402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155401",
+      "Nombre": "ECUACIONES DIFERENCIALES",
+      "Código Docente": 1915,
+      "Horario": [
+        "JUEVES 08:00-10:00 SA205",
+        "VIERNES 08:00-10:00 SA204"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155808",
+      "Nombre": "FORMULACION Y EVALUACION DE PR",
+      "Código Docente": 2049,
+      "Horario": [
+        "MARTES 08:00-10:00 SB404",
+        "JUEVES 08:00-09:00 SC402"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155503",
+      "Nombre": "ELECTRONICA",
+      "Código Docente": 6398,
+      "Horario": [
+        "MARTES 14:00-16:00 LG108",
+        "MIERCOLES 14:00-16:00 SB402"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155516",
+      "Nombre": "CATEDRA DE PAZ, DESARROLLO Y P",
+      "Código Docente": 5990,
+      "Horario": [
+        "MIERCOLES 10:00-12:00 SA206"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155204",
+      "Nombre": "PROGRAMACION ORIENTADA A OBJET",
+      "Código Docente": 3852,
+      "Horario": [
+        "MARTES 08:00-10:00 SC401",
+        "MIERCOLES 10:00-12:00 SB402"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155301",
+      "Nombre": "CALCULO VECTORIAL",
+      "Código Docente": 5262,
+      "Horario": [
+        "LUNES 10:00-12:00 SA202",
+        "MIERCOLES 06:00-08:00 SA205"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155605",
+      "Nombre": "BASES DE DATOS",
+      "Código Docente": 1496,
+      "Horario": [
+        "MIERCOLES 10:00-12:00 SA411",
+        "VIERNES 08:00-10:00 SA411"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155501",
+      "Nombre": "ANALISIS NUMERICO",
+      "Código Docente": 2330,
+      "Horario": [
+        "JUEVES 10:00-12:00 AG405",
+        "VIERNES 11:00-12:00 AG201"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1156802",
+      "Nombre": "INFORMATICA EDUCATIVA",
+      "Código Docente": 1995,
+      "Horario": [
+        "LUNES 07:00-10:00 SA402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155905",
+      "Nombre": "ARQUITECTURA DE SOFTWARE",
+      "Código Docente": 3852,
+      "Horario": [
+        "JUEVES 10:00-13:00 SB403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155707",
+      "Nombre": "ETICA PROFESIONAL",
+      "Código Docente": 6908,
+      "Horario": [
+        "VIERNES 08:00-10:00 SA205"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155506",
+      "Nombre": "SEMINARIO DE INVESTIGACION II",
+      "Código Docente": 1995,
+      "Horario": [
+        "MARTES 10:00-12:00 SC402"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155808",
+      "Nombre": "FORMULACION Y EVALUACION DE PR",
+      "Código Docente": 1872,
+      "Horario": [
+        "LUNES 09:00-10:00 SA401",
+        "VIERNES 10:00-12:00 SB404"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155106",
+      "Nombre": "COMUNICACION I",
+      "Código Docente": 6525,
+      "Horario": [
+        "MARTES 06:00-08:00 AG401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155102",
+      "Nombre": "MATEMATICAS DISCRETAS",
+      "Código Docente": 6529,
+      "Horario": [
+        "MARTES 10:00-12:00 SB403",
+        "VIERNES 09:00-10:00 SA402"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155101",
+      "Nombre": "CALCULO DIFERENCIAL",
+      "Código Docente": 2523,
+      "Horario": [
+        "MIERCOLES 06:00-08:00 SA207",
+        "JUEVES 10:00-12:00 SA312"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155104",
+      "Nombre": "FUNDAMENTOS DE PROGRAMACION",
+      "Código Docente": 6076,
+      "Horario": [
+        "JUEVES 06:00-08:00 SA403",
+        "VIERNES 08:00-10:00 SB404"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155206",
+      "Nombre": "COMUNICACION II",
+      "Código Docente": 4229,
+      "Horario": [
+        "MARTES 08:00-10:00 SF304"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155607",
+      "Nombre": "CONSTITUCION Y CIVISMO",
+      "Código Docente": 5439,
+      "Horario": [
+        "MIERCOLES 11:00-13:00 AG404"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155306",
+      "Nombre": "SEMINARIO DE INVESTIGACION I",
+      "Código Docente": 1995,
+      "Horario": [
+        "MARTES 12:00-14:00 SC401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155203",
+      "Nombre": "FISICA MECANICA",
+      "Código Docente": 6143,
+      "Horario": [
+        "MIERCOLES 09:00-10:00 LBF02",
+        "JUEVES 10:00-12:00 TE000",
+        "VIERNES 10:00-11:00 TE000"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155608",
+      "Nombre": "PLANEACION ESTRATEGICA DE SIST",
+      "Código Docente": 6209,
+      "Horario": [
+        "MARTES 10:00-12:00 SC401",
+        "MIERCOLES 09:00-10:00 SA209"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1155609",
+      "Nombre": "SEMINARIO INTEGRADOR II",
+      "Código Docente": 2049,
+      "Horario": [
+        "LUNES 08:00-10:00 SA414"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155606",
+      "Nombre": "PROGRAMACION WEB",
+      "Código Docente": 6076,
+      "Horario": [
+        "MARTES 06:00-08:00 SA414",
+        "JUEVES 08:00-10:00 SA411"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155804",
+      "Nombre": "REDES DE COMPUTADORES",
+      "Código Docente": 1178,
+      "Horario": [
+        "MIERCOLES 08:00-10:00 SA412",
+        "VIERNES 10:00-11:00 SB403"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155706",
+      "Nombre": "SEMINARIO DE INVESTIGACION III",
+      "Código Docente": 5096,
+      "Horario": [
+        "LUNES 08:00-10:00 SB401"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155303",
+      "Nombre": "FISICA ELECTROMAGNETICA",
+      "Código Docente": 2471,
+      "Horario": [
+        "LUNES 06:00-08:00 AG304",
+        "MARTES 08:00-09:00 SG406",
+        "MIERCOLES 08:00-09:00 LBF04"
+      ],
+      "Grupo": "C"
+    },
+    {
+      "Materia": "1155708",
+      "Nombre": "ADMINISTRACION DE PROYECTOS IN",
+      "Código Docente": 2049,
+      "Horario": [
+        "JUEVES 10:00-13:00 SB404"
+      ],
+      "Grupo": "B"
+    },
+    {
+      "Materia": "1151009",
+      "Nombre": "PROYECTO DE GRADO",
+      "Horario": [
+        "JUEVES 20:00-21:00 TE000",
+        "JUEVES 18:00-20:00 TE000"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155104",
+      "Nombre": "FUNDAMENTOS DE PROGRAMACION",
+      "Código Docente": 3556,
+      "Horario": [
+        "JUEVES 06:00-08:00 SA401",
+        "VIERNES 08:00-10:00 SA401"
+      ],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "0151018",
+      "Nombre": "TRABAJO DE GRADO",
+      "Horario": [],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "1155810",
+      "Nombre": "ADQUISICIONES EN LA GESTIóN DE",
+      "Horario": [],
+      "Grupo": "A"
+    },
+    {
+      "Materia": "0151020",
+      "Nombre": "PROYECTO DE GRADO",
+      "Horario": [],
+      "Grupo": "A"
+    }
+  ]
+}

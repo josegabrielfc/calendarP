@@ -65,6 +65,7 @@ router.post("/update_xlsx", async (req, res) => {
     data = data.filter((item) => item.Materia);
     await insertData(data);
     //console.log(data);
+    //res.json({ data });
     res.status(200).send("Datos insertados correctamente en la base de datos.");
   } catch (error) {
     console.error("Error en el endpoint /update_xlsx:", error);
@@ -120,9 +121,28 @@ router.get("/horario/:materiaId", async (req, res) => {
   }
 });
 
+router.get("/horario/:materiaId/:grupoId", async (req, res) => {
+  try {
+    const { materiaId, grupoId } = req.params;
+
+    const query = `
+      SELECT id, dia, hora_inicio, hora_fin
+      FROM Horario
+      WHERE materia_id = ? AND grupo_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+    `;
+
+    const [horarios] = await pool.query(query, [materiaId, grupoId]);
+
+    res.json({ horarios });
+  } catch (error) {
+    console.error("Error al obtener los horarios:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
 router.post("/seleccionar-aleatorio", async (req, res) => {
   try {
-    // Obtener todas las combinaciones únicas de id_materia y id_grupo desde la tabla Materia_grupo
+    // Obtener todas las combinaciones únicas de materia_id y grupo_id desde la tabla Materia_grupo
     const combinacionesQuery = `
       SELECT DISTINCT materia_id, grupo_id
       FROM Materia_grupo;
@@ -132,7 +152,7 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
 
     const horariosSeleccionados = new Map();
 
-    // Iterar sobre las combinaciones únicas de id_materia e id_grupo
+    // Iterar sobre las combinaciones únicas de materia_id e id_grupo
     for (const combinacion of combinaciones) {
       const { materia_id, grupo_id } = combinacion;
 
@@ -161,12 +181,14 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
       }
     }
 
-    const horariosSeleccionadosArray = Array.from(horariosSeleccionados.values());
+    const horariosSeleccionadosArray = Array.from(
+      horariosSeleccionados.values()
+    );
 
     // Insertar los horarios seleccionados en la tabla Seleccionar
     for (const horario of horariosSeleccionadosArray) {
       const insertSeleccionQuery = `
-        INSERT INTO Seleccionar (horario_id, id_materia, grupo_id, dia, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?, ?);
+        INSERT INTO Seleccionar (horario_id, materia_id, grupo_id, dia, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?, ?);
         `;
 
       await pool.query(insertSeleccionQuery, [
@@ -189,22 +211,36 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
 
 router.post("/select-horario", async (req, res) => {
   try {
-    const { id_materia, grupo_id, dia, hora_inicio, hora_fin } = req.body;
+    const { materia_id, grupo_id, dia, hora_inicio, hora_fin } = req.body;
 
-    /*const insertHorarioQuery = `
-      INSERT INTO Horario (materia_id, grupo_id, dia, hora_inicio, hora_fin)
-      VALUES (?, ?, ?, ?, ?);
-    `;
-    const [horarioResult] = await pool.query(insertHorarioQuery, [id_materia, grupo_id, dia, hora_inicio, hora_fin]);
-    const horarioId = horarioResult.insertId;*/
+    const query = `
+        SELECT id
+        FROM Horario
+        WHERE materia_id = ? AND grupo_id = ? AND dia = ? AND hora_inicio = ? AND hora_fin = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+      `;
 
+    const [horarioDisponible] = await pool.query(query, [
+      materia_id,
+      grupo_id,
+      dia,
+      hora_inicio,
+      hora_fin,
+    ]);
+
+    // Verificar si el horario está disponible
+    if (!horarioDisponible) {
+      res.status(404).send("El horario seleccionado no está disponible para la materia y grupo específicos.");
+      return;
+    }
+
+    // Insertar la selección en la tabla "Seleccionar"
     const insertSeleccionQuery = `
-      INSERT INTO Seleccionar (horario_id, id_materia, grupo_id, dia, hora_inicio, hora_fin)
-      VALUES (?, ?, ?, ?, ?, ?);
-    `;
+        INSERT INTO Seleccionar (materia_id, grupo_id, dia, hora_inicio, hora_fin)
+        VALUES (?, ?, ?, ?, ?);
+      `;
+
     await pool.query(insertSeleccionQuery, [
-      horarioId,
-      id_materia,
+      materia_id,
       grupo_id,
       dia,
       hora_inicio,
@@ -218,29 +254,25 @@ router.post("/select-horario", async (req, res) => {
   }
 });
 
-router.delete("/delete-select-horario/:id_materia", async (req, res) => {
+router.delete("/delete-select-horario/:materiaId/:grupoId", async (req, res) => {
   try {
-    const id_materia = req.params.id_materia;
+    const { materiaId, grupoId } = req.params;
 
-    // Obtener el horario_id asociado a la materia
     const getHorarioIdQuery =
-      "SELECT horario_id FROM Seleccionar WHERE id_materia = ?";
-    const [result] = await pool.query(getHorarioIdQuery, [id_materia]);
+      "SELECT horario_id FROM Seleccionar WHERE materia_id = ? AND grupo_id = ?";
+    const [result] = await pool.query(getHorarioIdQuery, [materiaId, grupoId]);
 
     if (result.length === 0) {
-      res
-        .status(404)
-        .send(
+      res.status(404).send(
           "No se encontró ninguna selección de horario para la materia proporcionada."
         );
       return;
     }
 
-    // Eliminar la entrada en la tabla Seleccionar
-    const deleteSeleccionQuery = "DELETE FROM Seleccionar WHERE id_materia = ?";
-    await pool.query(deleteSeleccionQuery, [id_materia]);
+    const deleteSeleccionQuery = "DELETE FROM Seleccionar WHERE materia_id = ? AND grupo_id = ?";
+    await pool.query(deleteSeleccionQuery, [materiaId, grupoId]);
 
-    res.status(200).send("Horario eliminado correctamente.");
+    res.status(200).send("Horario de la materia "+materiaId+", grupo "+grupoId+" eliminado correctamente.");
   } catch (error) {
     console.error("Error al eliminar el horario:", error);
     res.status(500).send("Error interno del servidor.");

@@ -1,0 +1,16 @@
+{
+  "horarios": [
+    {
+      "id": 100,
+      "dia": "MARTES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    },
+    {
+      "id": 101,
+      "dia": "JUEVES",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "10:00:00"
+    }
+  ]
+}

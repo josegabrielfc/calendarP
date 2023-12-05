@@ -68,7 +68,7 @@ async function createTables(pool) {
         id INT AUTO_INCREMENT PRIMARY KEY,
         horario_id INT,
         FOREIGN KEY (horario_id) REFERENCES Horario(id),
-        id_materia INT,
+        materia_id INT,
         grupo_id CHAR(1),
         dia VARCHAR(50),
         hora_inicio TIME,
