@@ -1,9 +1,9 @@
 'use strict'
-const config = require('./config')
+const config = require('./src/config')
 const mysql = require("mysql2/promise");
-const app = require('./app')
+const app = require('./src/app')
 // Database
-const { createDatabase, createTables} = require("./db");
+const { createDatabase, createTables} = require("./src/db");
 
 const dbConfig = config.db;
 
