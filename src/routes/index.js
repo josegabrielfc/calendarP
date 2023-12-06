@@ -295,6 +295,53 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
   }
 });
 
+router.post("/select", async (req, res) => {
+  try {
+    const { horarioId, materiaId, grupoId } = req.body;
+
+    // Realizar el cálculo de las horas antes de la consulta
+    const diffHoras = /* tu lógica para calcular la diferencia de horas */;
+    
+    const query = `
+      SELECT dia, hora_inicio, hora_fin
+      FROM Horario
+      WHERE horario_id = ? AND materia_id = ? AND grupo_id = ? AND ${diffHoras} >= 2;
+    `;
+
+    const [horarioDisponible] = await pool.query(query, [horarioId, materiaId, grupoId]);
+
+    // Verificar si el horario está disponible
+    if (!horarioDisponible || horarioDisponible.length === 0) {
+      res.status(404).send("El horario seleccionado no está disponible para la materia y grupo específicos.");
+      return;
+    }
+
+    const horario = horarioDisponible[0];
+    const { dia, hora_inicio: horaInicio, hora_fin: horaFin } = horario;
+
+    // Insertar la selección en la tabla "Seleccionar"
+    const insertSeleccionQuery = `
+      INSERT INTO Seleccionar (horario_id, materia_id, grupo_id, dia, hora_inicio, hora_fin)
+      VALUES (?, ?, ?, ?, ?, ?);
+    `;
+
+    const [seleccion] = await pool.query(insertSeleccionQuery, [
+      horarioId,
+      materiaId,
+      grupoId,
+      dia,
+      horaInicio,
+      horaFin,
+    ]);
+
+    res.json({ horarioDisponible, seleccion });
+  } catch (error) {
+    console.error("Error al seleccionar y guardar el horario:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+
 router.post("/select-horario", async (req, res) => {
   try {
     const { materia_id, grupo_id, dia, hora_inicio, hora_fin } = req.body;
@@ -436,7 +483,50 @@ router.get("/horarios-semanas", async (req, res) => {
   }
 });
 
+router.post("/selecct-week/:horarioId", async(req, res) => {
+  try {
+    const x = null;
+  } catch (error) {
+    
+  }
+});
 
+router.post("/horarios-por-fechas", async (req, res) => {
+  try {
+    const { fechaInicio } = req.body;
+
+    const { diaInicioT, diaFinT, fechaFin, fechasYDias } = calcularFechaFin(moment(fechaInicio, "DD/MM/YYYY"));
+
+    const days = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"];
+    const horariosPrimeraSemana = [];
+    const horariosSegundaSemana = [];
+    const result = {};
+
+    for (const day of days) {
+      // Determinar qué semana corresponde al día
+      const semana = day <= "VIERNES" ? horariosPrimeraSemana : horariosSegundaSemana;
+
+      const query = "SELECT * FROM Seleccionar WHERE dia = ?";
+      const [selecciones] = await pool.query(query, [day]);
+
+      // Filtrar las selecciones para el día actual
+      const horariosDia = selecciones.filter((horario) => horario.dia === day);
+
+      // Agregar las selecciones al resultado
+      for (const fecha of fechasYDias) {
+        const key = `${day}-${fecha.fecha}`;
+        if (!result[key]) {
+          result[key] = [];
+        }
+        result[key].push(...horariosDia.map((horario) => ({ ...horario, fecha: fecha.fecha })));
+      }
+    }
+    res.json({ horariosPorFecha: result });
+  } catch (error) {
+    console.error("Error al obtener los horarios por fechas:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
 
 function calcularFechaFin(fechaInicio) {
   const fechaInicioMoment = moment(fechaInicio, 'DD/MM/YYYY');
