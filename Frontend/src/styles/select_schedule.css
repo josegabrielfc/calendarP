@@ -1,0 +1,64 @@
+.subject-container {
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.subject-name {
+  background-color: #f5f5f5;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  text-align: left;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subject-name:hover {
+  background-color: #eaeaea;
+}
+
+.schedule-container {
+  padding: 8px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.schedule {
+  padding: 4px;
+  background-color: #f9f9f9;
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.schedule:hover {
+  background-color: #dfdcdc;
+}
+
+.schedule.selected {
+  background-color: #74b0f5;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.next-page {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #74b0f5;
+  color: white;
+  border: 1px solid #74b0f5;
+  cursor: pointer;
+}
+
+.next-page:hover {
+  background-color: #4795ee;
+  border: 1px solid #4795ee;
+}
