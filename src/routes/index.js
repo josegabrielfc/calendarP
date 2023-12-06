@@ -4,6 +4,7 @@ const { insertData, executeScript, pool } = require("../db");
 const auth = require("../middleware/auth");
 const userCtrl = require("../controller/user");
 const moment = require("moment");
+const holidays = require('./holidays'); 
 
 router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
@@ -434,5 +435,87 @@ router.get("/horarios-semanas", async (req, res) => {
     res.status(500).send("Error interno del servidor.");
   }
 });
+
+
+
+function calcularFechaFin(fechaInicio) {
+  const fechaInicioMoment = moment(fechaInicio, 'DD/MM/YYYY');
+  let diasLaborables = 0;
+  const fechasYDias = [];
+
+  while (diasLaborables < 10) {
+    const diaSemanaActual = fechaInicioMoment.day();
+    const fechaActual = fechaInicioMoment.format('DD/MM/YYYY');
+    if (diaSemanaActual >= 1 && diaSemanaActual <= 5 && !isHoliday(fechaActual)) {
+      diasLaborables++;
+      const fechaYDiaActual = {
+        fecha: fechaActual,
+        dia: translateDay(fechaInicioMoment.format('dddd'))
+      };
+      fechasYDias.push(fechaYDiaActual);
+    }
+    fechaInicioMoment.add(1, 'days');
+  }
+  fechaInicioMoment.add(-1, 'days');
+  const fechaFin = fechaInicioMoment.format('DD/MM/YYYY');
+  const diaFin = fechaInicioMoment.format('dddd');
+  const diaFinT = translateDay(diaFin);
+
+  const diaInicio = moment(fechaInicio, 'DD/MM/YYYY').format('dddd');
+  const diaInicioT = translateDay(diaInicio);
+  
+  return { diaInicioT, fechaInicio, diaFinT, fechaFin, fechasYDias };
+}
+
+function mapDias(fechasYDias, diaBuscado) {
+  const mapaDias = new Map();
+
+  // Llenar el mapa con las fechas asociadas a cada día
+  fechasYDias.forEach(({ fecha, dia }) => {
+    if (!mapaDias.has(dia)) {
+      mapaDias.set(dia, []);
+    }
+    mapaDias.get(dia).push(fecha);
+  });
+  // Obtener las fechas asociadas al día buscado
+  const fechasDelDia = mapaDias.get(diaBuscado) || [];
+
+  return fechasDelDia;
+  /* Imprimir las fechas
+  console.log(`${diaBuscado} {`);fechasDelDia.forEach((fecha) => { console.log(`${fecha}`); }); console.log('}');*/
+}
+
+function translateDay(day) {
+  const translate = {
+    'Monday': 'LUNES',
+    'Tuesday': 'MARTES',
+    'Wednesday': 'MIERCOLES',
+    'Thursday': 'JUEVES',
+    'Friday': 'VIERNES'
+  };
+  return translate[day];
+}
+
+function isHoliday(date) {
+  // Verifica si la fecha está en la lista de días festivos
+  return holidays.some(holiday => holiday.date === date);
+}
+
+// Ejemplo de uso
+const fechaInicio = '29/04/2024'; //Mejor valor para prueba
+const resultado = calcularFechaFin(fechaInicio);
+
+console.log(`Fecha de inicio: ${resultado.fechaInicio} (${resultado.diaInicioT})`);
+console.log(`Fecha de finalización: ${resultado.fechaFin} (${resultado.diaFinT})`);
+
+console.log('\nFechas y Días Iterados:');
+resultado.fechasYDias.forEach(({ fecha, dia }) => {
+  console.log(`${fecha} - ${dia}`);
+});
+// Mostrar fechas asociadas a MARTES
+// Ejemplo de uso para obtener fechas asociadas a MARTES
+const fechasDeMartes = mapDias(resultado.fechasYDias, 'MARTES');
+console.log('Fechas asociadas a MARTES:', fechasDeMartes);
+
 
 module.exports = router;
