@@ -15,7 +15,7 @@ const CalendarWeekView = ({ events }) => {
   const newEvents = processEvents(events);
   // Crear una cuadrícula para las horas y los días
   const renderGrid = () => {
-    const hours = Array.from({ length: 12 }, (_, i) => i + 2); // Ejemplo: de 8 a 20 horas
+    const hours = Array.from({ length: 12 }, (_, i) => i + 6); // Ejemplo: de 8 a 20 horas
     return (
       <table>
         <thead>

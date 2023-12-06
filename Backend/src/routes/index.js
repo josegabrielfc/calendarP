@@ -295,7 +295,7 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
   }
 });
 
-router.post("/select", async (req, res) => {
+/*router.post("/select", async (req, res) => {
   try {
     const { horarioId, materiaId, grupoId } = req.body;
 
@@ -304,7 +304,7 @@ router.post("/select", async (req, res) => {
       SELECT dia, hora_inicio, hora_fin
       FROM Horario
       WHERE horario_id = ? AND materia_id = ? AND grupo_id = ? AND  >= 2;
-    `;*/
+    `;
 
     const [horarioDisponible] = await pool.query(query, [horarioId, materiaId, grupoId]);
 
@@ -337,7 +337,7 @@ router.post("/select", async (req, res) => {
     console.error("Error al seleccionar y guardar el horario:", error);
     res.status(500).send("Error interno del servidor.");
   }
-});
+});*/
 
 
 router.post("/select-horario", async (req, res) => {
@@ -498,33 +498,65 @@ router.post("/horarios-por-fechas", async (req, res) => {
     const days = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"];
     const horariosPrimeraSemana = [];
     const horariosSegundaSemana = [];
+    const horariosTercerSemana = [];
     const result = {};
 
-    for (const day of days) {
-      // Determinar qué semana corresponde al día
-      const semana = day <= "VIERNES" ? horariosPrimeraSemana : horariosSegundaSemana;
-
+    for (const { fecha, dia } of fechasYDias) {
       const query = "SELECT * FROM Seleccionar WHERE dia = ?";
-      const [selecciones] = await pool.query(query, [day]);
-
-      // Filtrar las selecciones para el día actual
-      const horariosDia = selecciones.filter((horario) => horario.dia === day);
+      const [selecciones] = await pool.query(query, [dia]);
 
       // Agregar las selecciones al resultado
-      for (const fecha of fechasYDias) {
-        const key = `${day}-${fecha.fecha}`;
-        if (!result[key]) {
-          result[key] = [];
-        }
-        result[key].push(...horariosDia.map((horario) => ({ ...horario, fecha: fecha.fecha })));
-      }
+      const key = `${dia}-${fecha}`;
+      result[key] = selecciones.map((horario) => ({ ...horario, fecha }));
     }
+
     res.json({ horariosPorFecha: result });
   } catch (error) {
     console.error("Error al obtener los horarios por fechas:", error);
     res.status(500).send("Error interno del servidor.");
   }
 });
+
+router.post("/rangofechas", (req, res) => {
+  try {
+    // Ejemplo de uso ->  const fechaInicio = '29/04/2024'; //Mejor valor para prueba
+    const { fechaInicio } = req.body;
+    const resultado = calcularFechaFin(fechaInicio);
+    console.log(
+      `Fecha de inicio: ${resultado.fechaInicio} (${resultado.diaInicioT})`
+    );
+    console.log(
+      `Fecha de finalización: ${resultado.fechaFin} (${resultado.diaFinT})`
+    );
+
+    console.log("\nFechas y Días Iterados:");
+    resultado.fechasYDias.forEach(({ fecha, dia }) => {
+      console.log(`${fecha} - ${dia}`);
+    });
+
+    res.json({ horariosPorFecha: resultado.fechasYDias });
+  } catch (error) {
+    console.error("Error al obtener los horarios por fechas:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.post("/fecha-dia", (req, res) => {
+  try {
+    const { fechaInicio, dia } = req.body;
+    const resultado = calcularFechaFin(fechaInicio);
+
+    // Mostrar fechas asociadas a un dia
+    // Ejemplo de uso para obtener fechas asociadas a un dia
+    const dates = mapDias(resultado.fechasYDias, dia.toUpperCase());
+    console.log(`Fechas asociadas a: ${dia} (${dates})`);
+    res.json({ fechasPorDia: dates });
+  } catch (error) {
+    console.error("Error al obtener los horarios por fechas:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+  
 
 function calcularFechaFin(fechaInicio) {
   const fechaInicioMoment = moment(fechaInicio, 'DD/MM/YYYY');
@@ -555,7 +587,7 @@ function calcularFechaFin(fechaInicio) {
   return { diaInicioT, fechaInicio, diaFinT, fechaFin, fechasYDias };
 }
 
-function mapDias(fechasYDias, diaBuscado) {
+function  mapDias(fechasYDias, diaBuscado) {
   const mapaDias = new Map();
 
   // Llenar el mapa con las fechas asociadas a cada día
@@ -588,22 +620,6 @@ function isHoliday(date) {
   // Verifica si la fecha está en la lista de días festivos
   return holidays.some(holiday => holiday.date === date);
 }
-
-// Ejemplo de uso
-const fechaInicio = '29/04/2024'; //Mejor valor para prueba
-const resultado = calcularFechaFin(fechaInicio);
-
-console.log(`Fecha de inicio: ${resultado.fechaInicio} (${resultado.diaInicioT})`);
-console.log(`Fecha de finalización: ${resultado.fechaFin} (${resultado.diaFinT})`);
-
-console.log('\nFechas y Días Iterados:');
-resultado.fechasYDias.forEach(({ fecha, dia }) => {
-  console.log(`${fecha} - ${dia}`);
-});
-// Mostrar fechas asociadas a MARTES
-// Ejemplo de uso para obtener fechas asociadas a MARTES
-const fechasDeMartes = mapDias(resultado.fechasYDias, 'MARTES');
-console.log('Fechas asociadas a MARTES:', fechasDeMartes);
 
 
 module.exports = router;
