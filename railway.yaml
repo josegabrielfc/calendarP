@@ -2,7 +2,7 @@ name: calendarP
 services:
   - name: backend
     type: node
-    buildCommand: npm install
+    buildCommand: cd backend && npm install
     startCommand: node backend/index.js
     env:
       - key: PORT
