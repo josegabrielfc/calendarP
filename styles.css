@@ -57,13 +57,17 @@ body {
   background-color: #ffffff;
 }
 
+.center-div {
+  width: 80%;
+  margin: 0 auto;
+}
 .center-table {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 table {
-  width: 84%;
+  width: 100%;
 }
 /* Estilos para el padding en las celdas */
 .table th {
