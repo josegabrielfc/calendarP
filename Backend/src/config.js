@@ -1,8 +1,8 @@
-const config = require('dotenv');
+const dotenv = require('dotenv');
 
-config.config();
+dotenv.config();
 
-module.exports = {
+const config = {
   port: process.env.PORT || 3001,
   db: {
     host: process.env.DB_HOST || "localhost",
@@ -16,3 +16,5 @@ module.exports = {
   },
   SECRET_TOKEN: "pilar1234",
 };
+
+module.exports = config;

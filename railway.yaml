@@ -1,0 +1,24 @@
+name: calendarP
+services:
+  - name: backend
+    type: node
+    buildCommand: npm install
+    startCommand: node backend/index.js
+    env:
+      - key: PORT
+        value: 3002
+      - key: DB_HOST
+        value: ${{ env.DB_HOST }}
+      - key: DB_USER
+        value: ${{ env.DB_USER }}
+      - key: DB_PASSWORD
+        value: ${{ env.DB_PASSWORD }}
+      - key: DB_DATABASE
+        value: ${{ env.DB_DATABASE }}
+      - key: DB_PORT
+        value: ${{ env.DB_PORT }}
+  - name: frontend
+    type: static
+    env:
+      - key: PUBLIC_DIR
+        value: frontend/build
