@@ -11,13 +11,64 @@ router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
 });
 
-router.get("/test", (req, res) => {
-  const data = {
-    name: "Calendar",
-    website: "calendar.com",
-  };
-  res.json(data);
-});
+/*router.post("/login", async (req, res) => {
+  try {
+    // Obtenemos las credenciales del usuario
+    const { email, password } = req.body;
+
+    const query = `
+      SELECT * FROM Usuario WHERE email = ? AND password = ?;
+    `;
+    const userFound = await pool.query(query, [email, password]);
+
+    if (!userFound || !userFound.estado) {
+      req.log.warn(
+        {
+          user:
+            userFound !== null
+              ? [userFound.id, userFound.nombre]
+              : "usuario no registrado",
+        },
+        "Intento de acceso no autorizado"
+      );
+      return res.status(401).json({ error: "Credenciales incorrectas" });
+    }
+
+    // Comprobamos la contraseña
+    const match = await bcrypt.compare(password, userFound.password);
+
+    if (!match) {
+      return res.status(401).json({ error: "Credenciales incorrectas" });
+    }
+
+    // Creamos el token de acceso
+    const accessToken = jwt.sign(
+      {
+        id: userFound.id,
+        username: email,
+        nombre: userFound.nombre,
+        tipo: userFound.tipo,
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "3d" }
+    );
+
+    // Enviamos el token de acceso al usuario
+    res.json({
+      username: email,
+      name: userFound.nombre,
+      role: userFound.tipo,
+      accessToken,
+    });
+  } catch (error) {
+    const errorLogin = new Error(
+      `Ocurrio un problema al intentar iniciar sesión - ${error.message}`
+    );
+    errorLogin.stack = error.stack;
+    next(errorLogin);
+  }
+});*/
+
 router.post("/signup", userCtrl.signUp);
 router.post("/signin", userCtrl.signIn);
 router.get("/private", auth, (req, res) => {
@@ -566,6 +617,29 @@ router.post("/rangofechas", (req, res) => {
     });
 
     res.json({ horariosPorFecha: resultado.fechasYDias });
+  } catch (error) {
+    console.error("Error al obtener los horarios por fechas:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.post("/fechas",(req, res) => {
+  try {
+    const { fechaInicio } = req.body;
+    const resultado = calcularFechaFin(fechaInicio);
+    console.log(
+      `Fecha de inicio: ${resultado.fechaInicio} (${resultado.diaInicioT})`
+    );
+    console.log(
+      `Fecha de finalización: ${resultado.fechaFin} (${resultado.diaFinT})`
+    );
+
+    console.log("\nFechas y Días Iterados:");
+    resultado.fechasYDias.forEach(({ fecha, dia }) => {
+      console.log(`${fecha} - ${dia}`);
+    });
+
+    res.json({ horariosPorFecha: resultado.fechasYDias.map(({ fecha }) => fecha) });
   } catch (error) {
     console.error("Error al obtener los horarios por fechas:", error);
     res.status(500).send("Error interno del servidor.");
