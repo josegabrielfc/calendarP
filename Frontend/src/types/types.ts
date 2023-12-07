@@ -6,6 +6,7 @@ export interface Schedule {
   dia: string;
   hora_inicio: Date;
   hora_fin: Date;
+  salon: string;
 }
 
 export interface Subject {

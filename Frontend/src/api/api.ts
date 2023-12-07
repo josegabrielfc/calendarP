@@ -53,7 +53,7 @@ export const getAvailableSchedulesForSubject: (
 export const generatePdf = async (data) => {
   try {
     // Configurar la solicitud
-    const response = await fetch('localhost/generate_pdf', {
+    const response = await fetch('http://localhost:3002/generate_pdf', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

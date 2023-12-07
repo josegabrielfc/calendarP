@@ -88,7 +88,7 @@ async function insertData(data) {
       );
 
       // Relacionar Materia y Grupo en Materia_grupo
-      await connection.query("INSERT INTO Materia_grupo SET ?", {
+      await connection.query("INSERT IGNORE INTO Materia_grupo SET ?", {
         materia_id: entry.Materia,
         grupo_id: entry.Grupo,
       });
@@ -99,7 +99,7 @@ async function insertData(data) {
         [entry.Materia, entry.Grupo]
       );
 
-      const materiaGrupoId = materiaGrupoResult[0].materia_id; // Utilizar materia_id como clave foránea
+      const materiaId = materiaGrupoResult[0].materia_id; // Utilizar materia_id como clave foránea
       const grupoId = materiaGrupoResult[0].grupo_id; // Utilizar grupo_id como clave foránea
 
       // Insertar la información de Horario
@@ -107,11 +107,12 @@ async function insertData(data) {
         const [horarioResult] = await connection.query(
           "INSERT INTO Horario SET ?",
           {
-            materia_id: materiaGrupoId, // Usar el ID de Materia_grupo
+            materia_id: materiaId, // Usar el ID de Materia_grupo
             grupo_id: grupoId, // Usar el ID de Grupo
             dia: horario.split(" ")[0], // Extraer el día del horario
             hora_inicio: horario.split(" ")[1].split("-")[0], // Extraer la hora de inicio del horario
             hora_fin: horario.split(" ")[1].split("-")[1], // Extraer la hora de fin del horario
+            salon: horario.split(" ")[2], // Extraer el valor del salón
           }
         );
       }

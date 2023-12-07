@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const router = Router();
-const { insertData, executeScript, pool } = require("../db");
+const moment = require("moment");
+const fs = require('fs');
 const auth = require("../middleware/auth");
 const userCtrl = require("../controller/user");
-const moment = require("moment");
 const holidays = require('./holidays'); 
+const { insertData, executeScript, pool } = require("../db");
 
 router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
@@ -66,7 +67,7 @@ router.post("/update_xlsx", async (req, res) => {
     // Filtrar para eliminar los objetos que solo tienen Horario
     data = data.filter((item) => item.Materia);
     await insertData(data);
-    //console.log(data);
+    console.log(data);
     //res.json({ data });
     res.status(200).send("Datos insertados correctamente en la base de datos.");
   } catch (error) {
@@ -77,7 +78,7 @@ router.post("/update_xlsx", async (req, res) => {
 
 router.get("/materias", async (req, res) => {
   try {
-    const query = "SELECT * FROM calendar.materia";
+    const query = "SELECT * FROM Materia";
     const [materias] = await pool.query(query);
     res.json({ materias });
   } catch (error) {
@@ -86,6 +87,32 @@ router.get("/materias", async (req, res) => {
   }
 });
 
+router.get("/materias_sem/:idS", async (req, res) => {
+  try {
+    const [idS] = req.params.idS;
+    //await validarScript();
+    const query = `SELECT id FROM Materia  WHERE CAST(SUBSTRING(id, 5, 1) AS SIGNED) = ? `;
+    const [result] = await pool.query(query, [idS]);
+    console.log("Resultados de la consulta:", result);
+    res.json({ Semestre: result });
+  } catch (error) {
+    console.error("Error al obtener la lista de materias:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.get('/semestres', (req, res) => {
+  try {
+    const semestresData = fs.readFileSync('./src/JSON/semestres.json', 'utf8');
+    const semestres = JSON.parse(semestresData);
+    res.json(semestres);
+  } catch (error) {
+    console.error("Error al leer el archivo .json", error);
+    res.status(500).json({ error: 'Error al leer el archivo semestres.json' });
+  }
+});
+
+//Horarios Validos para Previos
 router.get("/horario", async (req, res) => {
   try {
     await executeScript();
@@ -110,7 +137,7 @@ router.get("/horario/:materiaId", async (req, res) => {
   try {
     const materiaId = req.params.materiaId;
     const query = `
-      SELECT id, grupo_id, dia, hora_inicio, hora_fin
+      SELECT id, grupo_id, dia, hora_inicio, hora_fin, salon
       FROM Horario
       WHERE materia_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
     `;
@@ -140,6 +167,10 @@ router.get("/horario/:materiaId/:grupoId", async (req, res) => {
     console.error("Error al obtener los horarios:", error);
     res.status(500).send("Error interno del servidor.");
   }
+});
+
+router.post("/generate_pdf", (req, res) =>{
+
 });
 
 //Editar horario segun materia y grupo

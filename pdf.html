@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <script src="./script.js" defer></script>
+    <script type="module" src="./generatePdf.js" defer></script>
+    <!-- Asegúrate de tener la ruta correcta y actualizada a jsPDF en tu archivo HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    </head>
+
+<body>
+    <div class="pdf-size">
+        <div class="top"><img src="./pdftop.jpg" alt="Descripción de la imagen"></div>
+        <div class="text-size">
+            <h3>RESOLUCIÓN N° 03 </h3>
+            <h3>31 de octubre de 2023</h3>
+            <br>
+            <h4>
+                POR LA CUAL SE PROGRAMAN LAS
+                FECHAS DE EXÁMENES FINALES DEL PLAN DE ESTUDIOS DE INGENIERÍA DE
+                SISTEMAS, CORRESPONDIENTES AL SEMESTRE 2023 - 2.
+            </h4>
+            <p>EL DIRECTOR DEL PLAN DE
+                ESTUDIOS DE INGENIERÍA DE SISTEMAS DE LA UFPS, en uso de sus facultades
+                reglamentadas,</p>
+            <br>
+            <h3>RESUELVE:</h3>
+            <h4>ARTÍCULO ÚNICO: Establecer las fechas de
+                EXÁMENES FINALES <br> correspondientes a los estudiantes del Plan de Estudios
+                de INGENIERÍA DE SISTEMAS</h4>
+            <br>
+            <div class="center-table">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="centered" id="semestreHeader"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaHorarios">
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <button class="butn" id="myguionpdf">Descargar PDF</button>
+        </div>
+    </div>
+</body>
+</html>

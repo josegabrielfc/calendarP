@@ -75,10 +75,11 @@ const AvailableSubjectsTable: React.FC = () => {
                     onClick={() => selectSchedule(subject, schedule)}
                   >
                     <div>Codigo: {subject.id}</div>
-                    <div>Group: {schedule.grupo_id}</div>
-                    <div>Day: {schedule.dia}</div>
-                    <div>Start Time: {schedule.hora_inicio}</div>
-                    <div>End Time: {schedule.hora_fin}</div>
+                    <div>Grupo: {schedule.grupo_id}</div>
+                    <div>Dia: {schedule.dia}</div>
+                    <div>Hora Inicio: {schedule.hora_inicio}</div>
+                    <div>Hora Fin: {schedule.hora_fin}</div>
+                    <div>Salon: {schedule.salon}</div>
                   </div>
                 );
               })}

@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS Horario (
     dia VARCHAR(50),
     hora_inicio TIME,
     hora_fin TIME,
+    salon VARCHAR(50),
     FOREIGN KEY (materia_id) REFERENCES Materia_grupo(materia_id),
     FOREIGN KEY (grupo_id) REFERENCES Materia_grupo(grupo_id)
 );
@@ -43,7 +44,8 @@ CREATE TABLE IF NOT EXISTS Seleccionar (
     grupo_id CHAR(1),
     dia VARCHAR(50),
     hora_inicio TIME,
-    hora_fin TIME
+    hora_fin TIME,
+    salon VARCHAR(50)
 );
 
 CREATE TABLE IF NOT EXISTS Document (
