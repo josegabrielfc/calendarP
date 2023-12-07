@@ -17,8 +17,3 @@ services:
         value: ${{ env.DB_DATABASE }}
       - key: DB_PORT
         value: ${{ env.DB_PORT }}
-  - name: frontend
-    type: static
-    env:
-      - key: PUBLIC_DIR
-        value: frontend/build
