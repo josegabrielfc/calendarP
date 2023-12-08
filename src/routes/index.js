@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const moment = require("moment");
 const fs = require('fs');
+const path = require('path');
 const auth = require("../middleware/auth");
 const userCtrl = require("../controller/user");
 const holidays = require('./holidays'); 
@@ -9,6 +10,33 @@ const { insertData, executeScript, pool } = require("../db");
 
 router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
+});
+
+router.get("/t", (req, res) => {
+  const filePath = path.join(
+    __dirname, '..', 
+    "views",
+    "home.html"
+  );
+  res.sendFile(filePath);
+});
+
+router.get("/form", (req, res) => {
+  const filePath = path.join(
+    __dirname, '..', 
+    "views",
+    "formulario.html"
+  );
+  res.sendFile(filePath);
+});
+router.post("/procesar-formulario", (req, res) => {
+  // Aquí manejas la lógica para procesar los datos del formulario
+  const { nombre, correo } = req.body;
+  
+  // Puedes hacer algo con los datos, como almacenarlos en una base de datos, etc.
+  
+  // Envía una respuesta de vuelta al cliente
+  res.send(`Datos recibidos: Nombre: ${nombre}, Correo: ${correo}`);
 });
 
 /*router.post("/login", async (req, res) => {
@@ -75,7 +103,7 @@ router.get("/private", auth, (req, res) => {
   res.status(200).send({ message: "Tienes acceso" });
 });
 
-router.post("/update_xlsx", async (req, res) => {
+router.post("/upload_xlsx", async (req, res) => {
   try {
     const xlsx = require("xlsx");
 
@@ -122,7 +150,7 @@ router.post("/update_xlsx", async (req, res) => {
     //res.json({ data });
     res.status(200).send("Datos insertados correctamente en la base de datos.");
   } catch (error) {
-    console.error("Error en el endpoint /update_xlsx:", error);
+    console.error("Error en el endpoint /upload_xlsx:", error);
     res.status(500).send("Error interno del servidor.");
   }
 });
@@ -356,7 +384,7 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
     // Insertar los horarios seleccionados en la tabla Seleccionar
     for (const horario of horariosSeleccionadosArray) {
       const insertSeleccionQuery = `
-        INSERT INTO Seleccionar (horario_id, materia_id, grupo_id, dia, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?, ?);
+        INSERT INTO Seleccionar (horario_id, materia_id, grupo_id, dia, hora_inicio, hora_fin, salon) VALUES (?, ?, ?, ?, ?, ?, ?);
         `;
 
       await pool.query(insertSeleccionQuery, [
@@ -366,6 +394,7 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
         horario.dia,
         horario.hora_inicio,
         horario.hora_fin,
+        horario.salon,
       ]);
     }
 

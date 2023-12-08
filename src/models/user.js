@@ -13,33 +13,12 @@ const connection = mysql.createPool({
   queueLimit: 0,
 });
 
-// Crear una tabla llamada 'users' en la base de datos
-const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255) UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    signupDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    lastLogin DATETIME
-  )
-`;
-
-// Ejecutar la creación de la tabla
-connection.query(createTableQuery).then(() => {
-    console.log("La tabla users se ha creado correctamente.");
-  }).catch((error) => {
-    console.error("Error al crear la tabla users:", error);
-  });
-
 // Definir el modelo del usuario
 class User {
   constructor(userData) {
     this.name = userData.name;
     this.email = userData.email;
     this.password = userData.password;
-    this.signupDate = userData.signupDate || new Date();
-    this.lastLogin = userData.lastLogin;
   }
 
   async save() {
@@ -48,16 +27,14 @@ class User {
     const hashedPassword = bcrypt.hashSync(this.password, salt);
 
     const insertUserQuery = `
-      INSERT INTO users (name, email, password, signupDate, lastLogin)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO users (name, email, password)
+      VALUES (?, ?, ?)
     `;
 
     const insertUserValues = [
       this.name,
       this.email,
       hashedPassword,
-      this.signupDate,
-      this.lastLogin,
     ];
 
     try {

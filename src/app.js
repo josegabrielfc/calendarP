@@ -17,8 +17,5 @@ app.use(cors());
 
 //routes
 app.use("/", api);
-app.use("/login", (req, res) => {
-  res.render("");
-});
 
 module.exports = app;
