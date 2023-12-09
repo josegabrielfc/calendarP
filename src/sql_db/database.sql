@@ -59,3 +59,13 @@ CREATE TABLE IF NOT EXISTS Document_horario (
     FOREIGN KEY (documentId) REFERENCES Document(id),
     FOREIGN KEY (horarioId) REFERENCES Horario(id)
 );
+
+CREATE FUNCTION IF NOT EXISTS calcDiffHoras(
+  horaInicio TIME,
+  horaFin TIME
+) RETURNS INT DETERMINISTIC
+BEGIN
+  DECLARE diferencia INT;
+  SET diferencia = TIMESTAMPDIFF(HOUR, horaInicio, horaFin);
+  RETURN diferencia;
+END;

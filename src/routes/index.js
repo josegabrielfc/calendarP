@@ -6,7 +6,7 @@ const path = require('path');
 const auth = require("../middleware/auth");
 const userCtrl = require("../controller/user");
 const holidays = require('./holidays'); 
-const { insertData, executeScript, pool } = require("../db");
+const { insertData, pool } = require("../db");
 
 router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
@@ -30,77 +30,9 @@ router.get("/form", (req, res) => {
   res.sendFile(filePath);
 });
 router.post("/procesar-formulario", (req, res) => {
-  // Aquí manejas la lógica para procesar los datos del formulario
   const { nombre, correo } = req.body;
   
-  // Puedes hacer algo con los datos, como almacenarlos en una base de datos, etc.
-  
-  // Envía una respuesta de vuelta al cliente
   res.send(`Datos recibidos: Nombre: ${nombre}, Correo: ${correo}`);
-});
-
-/*router.post("/login", async (req, res) => {
-  try {
-    // Obtenemos las credenciales del usuario
-    const { email, password } = req.body;
-
-    const query = `
-      SELECT * FROM Usuario WHERE email = ? AND password = ?;
-    `;
-    const userFound = await pool.query(query, [email, password]);
-
-    if (!userFound || !userFound.estado) {
-      req.log.warn(
-        {
-          user:
-            userFound !== null
-              ? [userFound.id, userFound.nombre]
-              : "usuario no registrado",
-        },
-        "Intento de acceso no autorizado"
-      );
-      return res.status(401).json({ error: "Credenciales incorrectas" });
-    }
-
-    // Comprobamos la contraseña
-    const match = await bcrypt.compare(password, userFound.password);
-
-    if (!match) {
-      return res.status(401).json({ error: "Credenciales incorrectas" });
-    }
-
-    // Creamos el token de acceso
-    const accessToken = jwt.sign(
-      {
-        id: userFound.id,
-        username: email,
-        nombre: userFound.nombre,
-        tipo: userFound.tipo,
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "3d" }
-    );
-
-    // Enviamos el token de acceso al usuario
-    res.json({
-      username: email,
-      name: userFound.nombre,
-      role: userFound.tipo,
-      accessToken,
-    });
-  } catch (error) {
-    const errorLogin = new Error(
-      `Ocurrio un problema al intentar iniciar sesión - ${error.message}`
-    );
-    errorLogin.stack = error.stack;
-    next(errorLogin);
-  }
-});*/
-
-router.post("/signup", userCtrl.signUp);
-router.post("/signin", userCtrl.signIn);
-router.get("/private", auth, (req, res) => {
-  res.status(200).send({ message: "Tienes acceso" });
 });
 
 router.post("/upload_xlsx", async (req, res) => {
@@ -754,6 +686,71 @@ function isHoliday(date) {
   // Verifica si la fecha está en la lista de días festivos
   return holidays.some(holiday => holiday.date === date);
 }
+
+/*router.post("/login", async (req, res) => {
+  try {
+    // Obtenemos las credenciales del usuario
+    const { email, password } = req.body;
+
+    const query = `
+      SELECT * FROM Usuario WHERE email = ? AND password = ?;
+    `;
+    const userFound = await pool.query(query, [email, password]);
+
+    if (!userFound || !userFound.estado) {
+      req.log.warn(
+        {
+          user:
+            userFound !== null
+              ? [userFound.id, userFound.nombre]
+              : "usuario no registrado",
+        },
+        "Intento de acceso no autorizado"
+      );
+      return res.status(401).json({ error: "Credenciales incorrectas" });
+    }
+
+    // Comprobamos la contraseña
+    const match = await bcrypt.compare(password, userFound.password);
+
+    if (!match) {
+      return res.status(401).json({ error: "Credenciales incorrectas" });
+    }
+
+    // Creamos el token de acceso
+    const accessToken = jwt.sign(
+      {
+        id: userFound.id,
+        username: email,
+        nombre: userFound.nombre,
+        tipo: userFound.tipo,
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "3d" }
+    );
+
+    // Enviamos el token de acceso al usuario
+    res.json({
+      username: email,
+      name: userFound.nombre,
+      role: userFound.tipo,
+      accessToken,
+    });
+  } catch (error) {
+    const errorLogin = new Error(
+      `Ocurrio un problema al intentar iniciar sesión - ${error.message}`
+    );
+    errorLogin.stack = error.stack;
+    next(errorLogin);
+  }
+});*/
+
+router.post("/signup", userCtrl.signUp);
+router.post("/signin", userCtrl.signIn);
+router.get("/private", auth, (req, res) => {
+  res.status(200).send({ message: "Tienes acceso" });
+});
+
 
 
 module.exports = router;
