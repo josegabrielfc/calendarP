@@ -101,7 +101,6 @@ router.get("/materias", async (req, res) => {
 router.get("/materias_sem/:idS", async (req, res) => {
   try {
     const [idS] = req.params.idS;
-    //await validarScript();
     const query = `SELECT id FROM Materia  WHERE CAST(SUBSTRING(id, 5, 1) AS SIGNED) = ? `;
     const [result] = await pool.query(query, [idS]);
     console.log("Resultados de la consulta:", result);
@@ -126,7 +125,6 @@ router.get('/semestres', (req, res) => {
 //Horarios Validos para Previos
 router.get("/horario", async (req, res) => {
   try {
-    await executeScript();
     const query = `
       SELECT *
       FROM Horario
