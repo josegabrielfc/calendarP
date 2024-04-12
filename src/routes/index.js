@@ -7,6 +7,10 @@ const auth = require("../middleware/auth");
 const userCtrl = require("../controller/user");
 const holidays = require('./holidays'); 
 const { insertData, pool } = require("../db");
+const xlsx = require("xlsx");
+const fileUpload = require("express-fileupload");
+
+router.use(fileUpload());
 
 router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
@@ -84,6 +88,56 @@ router.post("/upload_xlsx", async (req, res) => {
   } catch (error) {
     console.error("Error en el endpoint /upload_xlsx:", error);
     res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.post("/upload_xlsx_new", async (req, res) => {
+  try {
+    if (!req.files || !req.files.calendario) {
+      return res.status(400).send("No file uploaded or incorrect field name.");
+    }
+    // Assuming the uploaded file is in the 'calendario' field of the request body
+    const excelFile = req.files.calendario;
+
+    if (!excelFile) {
+      return res.status(400).send("No file uploaded.");
+    }
+
+    const workbook = xlsx.read(excelFile.data, { type: "buffer" });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+
+    let data = xlsx.utils.sheet_to_json(worksheet);
+
+    let completeEntry = null;
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].Materia) {
+        completeEntry = data[i];
+        completeEntry.Horario = Array.isArray(completeEntry.Horario)
+          ? completeEntry.Horario
+          : completeEntry.Horario
+          ? [completeEntry.Horario]
+          : [];
+
+        const matches = completeEntry.Materia.match(/^(\d+)([A-Z])$/);
+
+        if (matches && matches.length === 3) {
+          completeEntry.Materia = matches[1];
+          completeEntry.Grupo = matches[2];
+        }
+      } else if (completeEntry && !data[i].Materia && data[i].Horario) {
+        completeEntry.Horario.push(data[i].Horario);
+      }
+    }
+
+    data = data.filter((item) => item.Materia);
+    await insertData(data);
+
+    res.status(200).send("Data inserted successfully.");
+  } catch (error) {
+    console.error("Error in /upload_xlsx endpoint:", error);
+    res.status(500).send("Internal server error.");
   }
 });
 
@@ -266,7 +320,7 @@ router.put("/horario/:materiaId/:grupoId/:horarioId", async (req, res) => {
 });*/
 
 
-router.post("/seleccionar-aleatorio", async (req, res) => {
+router.post("z", async (req, res) => {
   try {
     // Obtener todas las combinaciones únicas de materia_id y grupo_id desde la tabla Materia_grupo
     const combinacionesQuery = `
