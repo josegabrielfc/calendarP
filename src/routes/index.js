@@ -9,12 +9,16 @@ const holidays = require('./holidays');
 const { insertData, pool } = require("../db");
 const xlsx = require("xlsx");
 const fileUpload = require("express-fileupload");
+const methods = require('../controller/authentication.controller');
 
 router.use(fileUpload());
 
 router.get("/", (req, res) => {
   res.json({ Title: "Hello World" });
 });
+
+router.post('/login', methods.login);
+router.post('/register', methods.register);
 
 router.get("/t", (req, res) => {
   const filePath = path.join(
@@ -33,10 +37,10 @@ router.get("/form", (req, res) => {
   );
   res.sendFile(filePath);
 });
-router.post("/procesar-formulario", (req, res) => {
-  const { nombre, correo } = req.body;
+router.post("/registerX", (req, res) => {
+  const { name, email, password } = req.body;
   
-  res.send(`Datos recibidos: Nombre: ${nombre}, Correo: ${correo}`);
+  res.send(`Datos recibidos: Nombre: ${name}, Correo: ${email}, ${password}`);
 });
 
 router.post("/upload_xlsx", async (req, res) => {
@@ -107,7 +111,7 @@ router.post("/upload_xlsx_new", async (req, res) => {
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
 
-    let data = xlsx.utils.sheet_to_json(worksheet);
+    let daa = xlsx.utils.sheet_to_json(worksheet);
 
     let completeEntry = null;
 
@@ -152,6 +156,19 @@ router.get("/materias", async (req, res) => {
   }
 });
 
+router.post("/registrar", async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const query = "INSERT INTO usuario (name, email, password) VALUES (?, ?, ?);";
+    await pool.query(query, [name, email, password]);
+
+    res.status(200).send("Horario seleccionado y guardado correctamente.");
+  } catch (error) {
+    console.error("Error al registrar usuario:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
 router.get("/materias_sem/:idS", async (req, res) => {
   try {
     const [idS] = req.params.idS;
@@ -182,7 +199,7 @@ router.get("/horario", async (req, res) => {
     const query = `
       SELECT *
       FROM Horario
-      WHERE calcDiffHoras(hora_inicio, hora_fin) >= 2;
+      WHERE calcDiffHoras(hora_inicio, hora_fin) >= 2 OR materia_id = 1155108;
     `;
 
     const [rows] = await pool.query(query);
@@ -202,7 +219,7 @@ router.get("/horario/:materiaId", async (req, res) => {
     const query = `
       SELECT id, grupo_id, dia, hora_inicio, hora_fin, salon
       FROM Horario
-      WHERE materia_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+      WHERE materia_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2 OR materia_id = 1155108;
     `;
     const [horarios] = await pool.query(query, [materiaId]);
     res.json({ horarios });
@@ -320,7 +337,7 @@ router.put("/horario/:materiaId/:grupoId/:horarioId", async (req, res) => {
 });*/
 
 
-router.post("z", async (req, res) => {
+router.post("/seleccionar-aleatorio", async (req, res) => {
   try {
     // Obtener todas las combinaciones únicas de materia_id y grupo_id desde la tabla Materia_grupo
     const combinacionesQuery = `

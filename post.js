@@ -3,8 +3,8 @@ const axios = require('axios');
 const data = {
   key: 'value'
 };
-
-axios.post('https://calendarp-production.up.railway.app/update_xlsx')
+//https://calendarp-production.up.railway.app/update_xlsx
+axios.post('localhost:3001/update_xlsx_new')
   .then(response => {
     console.log(response.data);
   })
