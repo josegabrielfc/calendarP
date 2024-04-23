@@ -7,7 +7,7 @@ const config = {
   db: {
     host: process.env.DB_HOST || "localhost",
     user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "1Q2W3E4R", //password
+    password: process.env.DB_PASSWORD || "12345678", //password
     database: process.env.DB_DATABASE || "calendar", //database
     port: process.env.DB_PORT || "3306",
     waitForConnections: true,

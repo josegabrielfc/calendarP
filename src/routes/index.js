@@ -408,7 +408,7 @@ router.put("/horario/:materiaId/:grupoId/:horarioId", async (req, res) => {
   }
 });*/
 
-router.post("/seleccionar-aleatorio", async (req, res) => {
+router.get("/seleccionar-aleatorio", async (req, res) => {
   try {
     // Obtener todas las combinaciones únicas de materia_id y grupo_id desde la tabla Materia_grupo
     const combinacionesQuery = `
@@ -459,18 +459,22 @@ router.post("/seleccionar-aleatorio", async (req, res) => {
         INSERT INTO Seleccionar (horario_id, materia_id, grupo_id, dia, hora_inicio, hora_fin, salon) VALUES (?, ?, ?, ?, ?, ?, ?);
         `;
 
-      await pool.query(insertSeleccionQuery, [
-        horario.id,
-        horario.materia_id,
-        horario.grupo_id,
-        horario.dia,
-        horario.hora_inicio,
-        horario.hora_fin,
-        horario.salon,
-      ]);
+      try {
+        await pool.query(insertSeleccionQuery, [
+          horario.id,
+          horario.materia_id,
+          horario.grupo_id,
+          horario.dia,
+          horario.hora_inicio,
+          horario.hora_fin,
+          horario.salon,
+        ]);
+      } catch (error) {
+
+      }
     }
 
-    res.json({ horariosSeleccionados: horariosSeleccionadosArray });
+    res.json({ horarios: horariosSeleccionadosArray });
     //res.status(200).send("Horarios seleccionados aleatoriamente y guardados correctamente.");
   } catch (error) {
     console.error("Error en el endpoint /seleccionar-aleatorio:", error);
