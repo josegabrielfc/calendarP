@@ -6,6 +6,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 router.use(fileUpload());
 
+router.get("/", (req, res) => {
+    res.json({ Title: "Hello World Gojo!" });
+  });
+
 router.get("/itadori", (req, res) => {
   res.json({ Title: "Hello World itadori!" });
 });
