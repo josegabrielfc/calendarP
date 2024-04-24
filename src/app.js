@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const app = express();
 const api = require("./routes/index");
+const test = require("./api/test");
 
 //Settings
 app.set("port", process.env.PORT || 3001);
@@ -17,5 +18,6 @@ app.use(cors());
 
 //routes
 app.use("/", api);
+app.use("/", test);
 
 module.exports = app;
