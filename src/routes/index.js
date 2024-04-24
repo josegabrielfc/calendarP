@@ -18,7 +18,11 @@ dotenv.config();
 router.use(fileUpload());
 
 router.get("/", (req, res) => {
-  res.json({ Title: "Hello World" });
+  res.json({ Title: "Hello World daddy!" });
+});
+
+router.get("/test", (req, res) => {
+  res.json({ Title: "Hello World test!" });
 });
 
 

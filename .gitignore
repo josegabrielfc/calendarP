@@ -2,3 +2,4 @@ node_modules
 # Backend
 .env
 src/logs
+.vercel
