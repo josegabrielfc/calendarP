@@ -18,6 +18,6 @@ app.use(cors());
 
 //routes
 //app.use("/", api);
-app.use("/", test);
+app.use("/api/test", test);
 
 module.exports = app;
