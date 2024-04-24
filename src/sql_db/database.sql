@@ -1,6 +1,6 @@
-drop database if exists calendar;
-create database if not exists calendar;
-use calendar;
+-- drop database if exists bzqezdgk8fzrw1iol2zw;
+-- create database if not exists bzqezdgk8fzrw1iol2zw;
+use bzqezdgk8fzrw1iol2zw;
 
 CREATE TABLE IF NOT EXISTS Usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -64,17 +64,3 @@ CREATE TABLE IF NOT EXISTS Document_horario (
     FOREIGN KEY (documentId) REFERENCES Document(id),
     FOREIGN KEY (horarioId) REFERENCES Horario(id)
 );
-
-DELIMITER //
-
-CREATE FUNCTION calcDiffHoras(
-  horaInicio TIME,
-  horaFin TIME
-) RETURNS INT DETERMINISTIC
-BEGIN
-  DECLARE diferencia INT;
-  SET diferencia = TIMESTAMPDIFF(HOUR, horaInicio, horaFin);
-  RETURN diferencia;
-END//
-
-DELIMITER ;

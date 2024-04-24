@@ -4,7 +4,7 @@ const fs = require('fs');
 const util = require('util');
 
 const dbConfig = config.db;
-const pool = mysql.createPool(dbConfig);
+const pool = mysql.createPool("uri");
 
 async function initializeDatabase() {
   try {

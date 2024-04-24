@@ -249,9 +249,7 @@ router.get("/semestres", (req, res) => {
 router.get("/horario", async (req, res) => {
   try {
     const query = `
-      SELECT *
-      FROM Horario
-      WHERE calcDiffHoras(hora_inicio, hora_fin) >= 2 OR materia_id = 1155108;
+      SELECT * FROM Horario WHERE hora_fin - hora_inicio >= 2 OR materia_id = 1155108;
     `;
 
     const [rows] = await pool.query(query);
@@ -271,7 +269,7 @@ router.get("/horario/:materiaId", async (req, res) => {
     const query = `
       SELECT id, grupo_id, dia, hora_inicio, hora_fin, salon
       FROM Horario
-      WHERE materia_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2 OR materia_id = 1155108;
+      WHERE materia_id = ? AND hora_fin - hora_inicio >= 2 OR materia_id = 1155108;
     `;
     const [horarios] = await pool.query(query, [materiaId]);
     res.json({ horarios });
@@ -289,7 +287,7 @@ router.get("/horario/:materiaId/:grupoId", async (req, res) => {
     const query = `
       SELECT id, dia, hora_inicio, hora_fin
       FROM Horario
-      WHERE materia_id = ? AND grupo_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+      WHERE materia_id = ? AND grupo_id = ? AND hora_fin - hora_inicio >= 2;
     `;
 
     const [horarios] = await pool.query(query, [materiaId, grupoId]);
@@ -428,7 +426,7 @@ router.get("/seleccionar-aleatorio", async (req, res) => {
       const horariosQuery = `
         SELECT *
         FROM Horario
-        WHERE materia_id = ? AND grupo_id = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+        WHERE materia_id = ? AND grupo_id = ? AND hora_fin - hora_inicio >= 2;
       `;
 
       const [horarios] = await pool.query(horariosQuery, [
@@ -533,7 +531,7 @@ router.post("/select-horario", async (req, res) => {
     const query = `
         SELECT id
         FROM Horario
-        WHERE materia_id = ? AND grupo_id = ? AND dia = ? AND hora_inicio = ? AND hora_fin = ? AND calcDiffHoras(hora_inicio, hora_fin) >= 2;
+        WHERE materia_id = ? AND grupo_id = ? AND dia = ? AND hora_inicio = ? AND hora_fin = ? AND hora_fin - hora_inicio >= 2;
       `;
 
     const [horarioDisponible] = await pool.query(query, [
