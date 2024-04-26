@@ -1,10 +1,8 @@
 const mysql = require("mysql2/promise");
 const config = require("./config");
-const fs = require('fs');
-const util = require('util');
 
 const dbConfig = config.db;
-const pool = mysql.createPool("uri");
+const pool = mysql.createPool(process.env.MYSQL_CONNECTION);
 
 async function initializeDatabase() {
   try {
