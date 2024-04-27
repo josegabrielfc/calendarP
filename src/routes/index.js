@@ -33,7 +33,7 @@ router.post("/register", async (req, res) => {
   const hashPassword = await bcryptjs.hash(password, salt);
   try {
     const query =
-      "INSERT INTO usuario (name, email, password) VALUES (?, ?, ?);";
+      "INSERT INTO Usuario (name, email, password) VALUES (?, ?, ?);";
     await pool.query(query, [name, email, hashPassword]);
 
     res
@@ -52,7 +52,7 @@ router.post("/registrar", async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const query =
-      "INSERT INTO usuario (name, email, password) VALUES (?, ?, ?);";
+      "INSERT INTO Usuario (name, email, password) VALUES (?, ?, ?);";
     await pool.query(query, [name, email, password]);
 
     res.status(200).send("Horario seleccionado y guardado correctamente.");
@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
 
   try {
     // Consultar usuario por correo electrónico
-    const query = "SELECT * FROM usuario WHERE email = ?";
+    const query = "SELECT * FROM Usuario WHERE email = ?";
     const [rows] = await pool.query(query, [email]);
 
     // Verificar si se encontró un usuario con el correo electrónico dado
