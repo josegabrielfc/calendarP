@@ -48,20 +48,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/registrar", async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const query =
-      "INSERT INTO Usuario (name, email, password) VALUES (?, ?, ?);";
-    await pool.query(query, [name, email, password]);
-
-    res.status(200).send("Horario seleccionado y guardado correctamente.");
-  } catch (error) {
-    console.error("Error al registrar usuario:", error);
-    res.status(500).send("Error interno del servidor.");
-  }
-});
-
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -214,6 +200,23 @@ router.post("/upload_xlsx_new", async (req, res) => {
     console.error("Error in /upload_xlsx endpoint:", error);
     res.status(500).send("Internal server error.");
   }
+});
+
+router.get("/holidays", async (req, res) => {
+  res.json({
+    status: "Success",
+    message: "Festivos obtenidos correctamente.",
+    holidays: holidays,
+});
+}); 
+
+router.get('/holidays_dates', (req, res) => {
+  const holidayDates = holidays.map(holiday => holiday.date);
+
+  res.json({
+      status: "Success",
+      holidayDates: holidayDates
+  });
 });
 
 router.get("/materias", async (req, res) => {
