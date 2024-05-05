@@ -4,9 +4,11 @@ const config = require("./config");
 const dbConfig = config.db;
 const pool = mysql.createPool(process.env.MYSQL_CONNECTION);
 
+let globalConnection = null;
+
 async function initializeDatabase() {
   try {
-    await pool.getConnection();
+    globalConnection = await pool.getConnection();
     console.log("Conexión a la base de datos establecida...");
   } catch (error) {
     console.error("Error al inicializar la base de datos:", error);
@@ -14,8 +16,11 @@ async function initializeDatabase() {
 }
 
 async function insertData(data) {
-  const connection = await pool.getConnection();
   try {
+    if (!globalConnection) {
+      console.error("No hay conexión global a la base de datos.");
+      return;
+    }
 
     // Tabla estatica Grupo
     for (let i = 0; i < 5; i++) {
@@ -27,39 +32,6 @@ async function insertData(data) {
         console.error(`Error al insertar para '${char}': ${error.message}`);
       }
     }
-
-    // Insertar el usuario (asumiendo que ya tienes la información del usuario)
-    const usuario = {
-      name: "Pilar",
-      email: "pilar@ufps.edu.com",
-      password: "123456789",
-    };
-    // Verificar si el usuario ya existe por su correo electrónico
-    const [existingUser] = await connection.query(
-      "SELECT * FROM Usuario WHERE email = ?",[usuario.email]
-    );
-    let userId;
-
-    if (existingUser.length > 0) {
-      // El usuario ya existe
-      userId = existingUser[0].id;
-    } else {
-      // Insertar el nuevo usuario si no existe
-      const [result] = await connection.query("INSERT INTO Usuario SET ?", [
-        usuario,
-      ]);
-      userId = result.insertId;
-    }
-
-    // Insertar la información del documento
-    const [documentoResult] = await connection.query(
-      "INSERT INTO Document SET ?",
-      {
-        userId: userId,
-        filename: "calendario.xlsx", // Reemplazar con el nombre real del archivo
-        path: "./src/routes/calendario.xlsx", // Reemplazar con la ruta real del archivo
-      }
-    );
 
     // Insertar la información del archivo (data) relacionada con el usuario
     for (const entry of data) {

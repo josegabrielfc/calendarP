@@ -29,6 +29,25 @@ router.post("/register", async (req, res) => {
       .status(400)
       .send({ status: "Error", message: "Los campos están incompletos" });
   }
+
+  try {
+    const [existingUser] = await pool.query(
+      "SELECT * FROM Usuario WHERE email = ?",
+      [email]
+    );
+    if (existingUser.length > 0) {
+      return res
+        .status(400)
+        .json({
+          status: "Email_Error",
+          message: "El correo electrónico ya está en uso",
+        });
+    }
+  } catch (error) {
+    console.error("Error al verificar el correo electrónico:", error);
+    return res.status(500).send("Error interno del servidor.");
+  }
+
   const salt = await bcryptjs.genSalt(5);
   const hashPassword = await bcryptjs.hash(password, salt);
   try {
@@ -36,12 +55,10 @@ router.post("/register", async (req, res) => {
       "INSERT INTO Usuario (name, email, password) VALUES (?, ?, ?);";
     await pool.query(query, [name, email, hashPassword]);
 
-    res
-      .status(200)
-      .json({
-        status: "Success",
-        message: "Usuario registrado correctamente.",
-      });
+    res.status(200).json({
+      status: "Success",
+      message: "Usuario registrado correctamente.",
+    });
   } catch (error) {
     console.error("Error al registrar usuario:", error);
     res.status(500).send("Error interno del servidor.");
@@ -64,12 +81,10 @@ router.post("/login", async (req, res) => {
 
     // Verificar si se encontró un usuario con el correo electrónico dado
     if (rows.length !== 1) {
-      return res
-        .status(400)
-        .send({
-          status: "Error",
-          message: "Correo electrónico o contraseña incorrectos",
-        });
+      return res.status(400).send({
+        status: "Error",
+        message: "Correo electrónico o contraseña incorrectos",
+      });
     }
 
     // Obtener el usuario de la fila de resultados
@@ -78,12 +93,10 @@ router.post("/login", async (req, res) => {
     // Verificar si la contraseña proporcionada coincide con la contraseña almacenada hasheada
     const passwordMatches = await bcryptjs.compare(password, user.password);
     if (!passwordMatches) {
-      return res
-        .status(400)
-        .send({
-          status: "Error",
-          message: "Correo electrónico o contraseña incorrectos",
-        });
+      return res.status(400).send({
+        status: "Error",
+        message: "Correo electrónico o contraseña incorrectos",
+      });
     }
 
     // Enviar respuesta de éxito
@@ -154,7 +167,7 @@ router.post("/upload_xlsx", async (req, res) => {
 
 router.post("/upload_xlsx_new", async (req, res) => {
   try {
-    res.setHeader('Access-Control-Allow-Origin','*')
+    res.setHeader("Access-Control-Allow-Origin", "*");
     if (!req.files || !req.files.calendario) {
       return res.status(400).send("No file uploaded or incorrect field name.");
     }
@@ -208,15 +221,15 @@ router.get("/holidays", async (req, res) => {
     status: "Success",
     message: "Festivos obtenidos correctamente.",
     holidays: holidays,
+  });
 });
-}); 
 
-router.get('/holidays_dates', (req, res) => {
-  const holidayDates = holidays.map(holiday => holiday.date);
+router.get("/holidays_dates", (req, res) => {
+  const holidayDates = holidays.map((holiday) => holiday.date);
 
   res.json({
-      status: "Success",
-      holidayDates: holidayDates
+    status: "Success",
+    holidayDates: holidayDates,
   });
 });
 
