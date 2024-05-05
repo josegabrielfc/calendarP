@@ -154,6 +154,7 @@ router.post("/upload_xlsx", async (req, res) => {
 
 router.post("/upload_xlsx_new", async (req, res) => {
   try {
+    res.setHeader('Access-Control-Allow-Origin','*')
     if (!req.files || !req.files.calendario) {
       return res.status(400).send("No file uploaded or incorrect field name.");
     }
