@@ -184,7 +184,7 @@ router.post("/upload_xlsx_new", async (req, res) => {
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
 
-    let daa = xlsx.utils.sheet_to_json(worksheet);
+    let data = xlsx.utils.sheet_to_json(worksheet);
 
     let completeEntry = null;
 
