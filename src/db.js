@@ -36,7 +36,7 @@ async function insertData(data) {
     // Insertar la información del archivo (data) relacionada con el usuario
     for (const entry of data) {
       // Insertar la información de Materia
-      const [materiaResult] = await connection.query(
+      const [materiaResult] = await globalConnection.query(
         "INSERT IGNORE INTO Materia SET ?",
         {
           id: entry.Materia,
@@ -45,13 +45,13 @@ async function insertData(data) {
       );
 
       // Relacionar Materia y Grupo en Materia_grupo
-      await connection.query("INSERT IGNORE INTO Materia_grupo SET ?", {
+      await globalConnection.query("INSERT IGNORE INTO Materia_grupo SET ?", {
         materia_id: entry.Materia,
         grupo_id: entry.Grupo,
       });
 
       // Obtener el ID de Materia_grupo recién insertado
-      const [materiaGrupoResult] = await connection.query(
+      const [materiaGrupoResult] = await globalConnection.query(
         "SELECT * FROM Materia_grupo WHERE materia_id = ? AND grupo_id = ?",
         [entry.Materia, entry.Grupo]
       );
@@ -61,7 +61,7 @@ async function insertData(data) {
 
       // Insertar la información de Horario
       for (const horario of entry.Horario) {
-        const [horarioResult] = await connection.query(
+        const [horarioResult] = await globalConnection.query(
           "INSERT INTO Horario SET ?",
           {
             materia_id: materiaId, // Usar el ID de Materia_grupo
@@ -77,7 +77,7 @@ async function insertData(data) {
   } catch (error) {
     console.error("Error al insertar datos en la base de datos:", error);
   } finally {
-    await connection.release();
+    await globalConnection.release();
   }
 }
 
