@@ -113,6 +113,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/*
 router.post("/upload_xlsx", async (req, res) => {
   try {
     const xlsx = require("xlsx");
@@ -164,6 +165,7 @@ router.post("/upload_xlsx", async (req, res) => {
     res.status(500).send("Error interno del servidor.");
   }
 });
+*/
 
 router.post("/upload_xlsx_new", async (req, res) => {
   try {
@@ -361,6 +363,57 @@ router.get("/seleccionar-aleatorio", async (req, res) => {
   } catch (error) {
     console.error("Error en el endpoint /seleccionar-aleatorio:", error);
     res.status(500).send("Error interno del servidor.");
+  }
+});
+
+router.post("/reset-horario", async (req, res) => {
+  try {
+    // Ejecutar la consulta para eliminar todos los datos de la tabla "Horario"
+    await pool.query("DELETE FROM Horario WHERE id > 0");
+    // Ejecutar la consulta para resetear el contador de identidad (id) en la tabla "Horario"
+    await pool.query("ALTER TABLE Horario AUTO_INCREMENT = 1");
+
+    // Responder con un mensaje de éxito
+    res.json({
+      status: "Success",
+      message: "Datos eliminados de la tabla 'Horario' y contador de identidad reseteado correctamente."
+    });
+  } catch (error) {
+    console.error("Error al resetear la tabla 'Horario':", error);
+    res.status(500).json({ status: "Error", message: "Error interno del servidor." });
+  }
+});
+
+
+router.post("/reset-materiagrupo", async (req, res) => {
+  try {
+    // Ejecutar la consulta para eliminar todos los datos de la tabla "Materia_grupo"
+    await pool.query("DELETE FROM Materia_grupo WHERE id > 0");
+
+    // Responder con un mensaje de éxito
+    res.json({
+      status: "Success",
+      message: "Datos eliminados de la tabla 'Materia_grupo' y contador de identidad reseteado correctamente."
+    });
+  } catch (error) {
+    console.error("Error al resetear la tabla 'Materia_grupo':", error);
+    res.status(500).json({ status: "Error", message: "Error interno del servidor." });
+  }
+});
+
+router.post("/reset-materia", async (req, res) => {
+  try {
+    // Ejecutar la consulta para eliminar todos los datos de la tabla "Materia"
+    await pool.query("DELETE FROM Materia WHERE id > 0");
+
+    // Responder con un mensaje de éxito
+    res.json({
+      status: "Success",
+      message: "Datos eliminados de la tabla 'Materia' y contador de identidad reseteado correctamente."
+    });
+  } catch (error) {
+    console.error("Error al resetear la tabla 'Materia':", error);
+    res.status(500).json({ status: "Error", message: "Error interno del servidor." });
   }
 });
 

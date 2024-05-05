@@ -22,7 +22,7 @@ async function insertData(data) {
       return;
     }
 
-    // Tabla estatica Grupo
+    /* Tabla estatica Grupo
     for (let i = 0; i < 5; i++) {
       // Generar un carácter 'A' hasta 'E' usando el código ASCII
       let char = String.fromCharCode(65 + i); // 65 es el código ASCII para 'A'
@@ -31,7 +31,7 @@ async function insertData(data) {
       } catch (error) {
         console.error(`Error al insertar para '${char}': ${error.message}`);
       }
-    }
+    }*/
 
     // Insertar la información del archivo (data) relacionada con el usuario
     for (const entry of data) {
