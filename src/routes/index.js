@@ -388,7 +388,7 @@ router.post("/reset-horario", async (req, res) => {
 router.post("/reset-materiagrupo", async (req, res) => {
   try {
     // Ejecutar la consulta para eliminar todos los datos de la tabla "Materia_grupo"
-    await pool.query("DELETE FROM Materia_grupo WHERE id > 0");
+    await pool.query("DELETE FROM Materia_grupo WHERE materia_id > 0");
 
     // Responder con un mensaje de éxito
     res.json({
