@@ -113,67 +113,22 @@ router.post("/login", async (req, res) => {
   }
 });
 
-/*
-router.post("/upload_xlsx", async (req, res) => {
-  try {
-    const xlsx = require("xlsx");
+// Listas Horarios y Materias
+let horarios = [];
+let materias = [];
+let grupos = [];
 
-    // Ruta al archivo Excel que deseas leer
-    const excelFilePath = "./src/routes/calendario.xlsx";
-    // Cargar el libro de trabajo desde el archivo
-    const workbook = xlsx.readFile(excelFilePath);
-    // Obtener el nombre de la primera hoja
-    const sheetName = workbook.SheetNames[0];
-    // Obtener los datos de la hoja
-    const worksheet = workbook.Sheets[sheetName];
-
-    // Convertir los datos a un formato que sea fácil de trabajar
-    let data = xlsx.utils.sheet_to_json(worksheet);
-
-    let completeEntry = null;
-
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].Materia) {
-        completeEntry = data[i];
-        if (!Array.isArray(completeEntry.Horario)) {
-          completeEntry.Horario = completeEntry.Horario
-            ? [completeEntry.Horario]
-            : [];
-        }
-        // Dividir la propiedad Materia en Número y Grupo
-        const matches = completeEntry.Materia.match(/^(\d+)([A-Z])$/);
-        if (matches && matches.length === 3) {
-          const nuevaMateria = matches[1];
-          const nuevoGrupo = matches[2];
-
-          completeEntry.Materia = nuevaMateria;
-          completeEntry.Grupo = nuevoGrupo;
-        }
-      } else if (completeEntry && !data[i].Materia && data[i].Horario) {
-        completeEntry.Horario.push(data[i].Horario);
-      }
-    }
-
-    // Filtrar para eliminar los objetos que solo tienen Horario
-    data = data.filter((item) => item.Materia);
-    await insertData(data);
-    console.log(data);
-    //res.json({ data });
-    res.status(200).send("Datos insertados correctamente en la base de datos.");
-  } catch (error) {
-    console.error("Error en el endpoint /upload_xlsx:", error);
-    res.status(500).send("Error interno del servidor.");
-  }
-});
-*/
-
-router.post("/upload_xlsx_new", async (req, res) => {
+router.post("/get_xlsx_data", async (req, res) => {
   try {
     res.setHeader("Access-Control-Allow-Origin", "*");
+    // Resetear listas para evitar acumulación de datos
+    horarios = [];
+    materias = [];
+    
     if (!req.files || !req.files.calendario) {
       return res.status(400).send("No file uploaded or incorrect field name.");
     }
-    // Assuming the uploaded file is in the 'calendario' field of the request body
+    
     const excelFile = req.files.calendario;
 
     if (!excelFile) {
@@ -187,6 +142,8 @@ router.post("/upload_xlsx_new", async (req, res) => {
     let data = xlsx.utils.sheet_to_json(worksheet);
 
     let completeEntry = null;
+    let idCounter = 1;
+    let materiasMap = new Map();
 
     for (let i = 0; i < data.length; i++) {
       if (data[i].Materia) {
@@ -203,45 +160,106 @@ router.post("/upload_xlsx_new", async (req, res) => {
           completeEntry.Materia = matches[1];
           completeEntry.Grupo = matches[2];
         }
+
+        if (!materiasMap.has(completeEntry.Materia)) {
+          materiasMap.set(completeEntry.Materia, {
+            id: completeEntry.Materia,
+            name: completeEntry.Nombre
+          });
+        }
+
+        for (let horario of completeEntry.Horario) {
+          const [dia, timeRange, salon] = horario.split(" ");
+          const [hora_inicio, hora_fin] = timeRange.split("-");
+
+          horarios.push({
+            id: idCounter++,
+            materia_id: completeEntry.Materia,
+            grupo_id: completeEntry.Grupo,
+            dia,
+            hora_inicio: `${hora_inicio}:00`,
+            hora_fin: `${hora_fin}:00`,
+            salon
+          });
+        }
       } else if (completeEntry && !data[i].Materia && data[i].Horario) {
-        completeEntry.Horario.push(data[i].Horario);
+        const [dia, timeRange, salon] = data[i].Horario.split(" ");
+        const [hora_inicio, hora_fin] = timeRange.split("-");
+
+        horarios.push({
+          id: idCounter++,
+          materia_id: completeEntry.Materia,
+          grupo_id: completeEntry.Grupo,
+          dia,
+          hora_inicio: `${hora_inicio}:00`,
+          hora_fin: `${hora_fin}:00`,
+          salon
+        });
       }
     }
 
-    data = data.filter((item) => item.Materia);
-    await insertData(data);
+    materias = Array.from(materiasMap.values());
 
-    res.status(200).send("Data inserted successfully.");
+    res.status(200).json({ horarios, materias });
+    //res.status(200).send("Horarios y materias cargados satisfactoriamente");
   } catch (error) {
-    console.error("Error in /upload_xlsx endpoint:", error);
+    console.error("Error in /get_xlsx_data endpoint:", error);
     res.status(500).send("Internal server error.");
   }
 });
 
-router.get("/holidays", async (req, res) => {
-  res.json({
-    status: "Success",
-    message: "Festivos obtenidos correctamente.",
-    holidays: holidays,
-  });
-});
-
-router.get("/holidays_dates", (req, res) => {
-  const holidayDates = holidays.map((holiday) => holiday.date);
-
-  res.json({
-    status: "Success",
-    holidayDates: holidayDates,
-  });
-});
-
 router.get("/materias", async (req, res) => {
   try {
-    const query = "SELECT * FROM Materia";
-    const [materias] = await pool.query(query);
     res.json({ materias });
   } catch (error) {
     console.error("Error al obtener la lista de materias:", error);
+  }
+});
+
+//Horarios validos x materia
+router.get("/horario/:materiaId", async (req, res) => {
+  try {
+    const materiaId = req.params.materiaId;
+    
+    // Filtrar los horarios válidos
+    const horariosValidos = horarios.filter(horario => {
+      const horaInicio = new Date(`2024-01-01T${horario.hora_inicio}`).getTime();
+      const horaFin = new Date(`2024-01-01T${horario.hora_fin}`).getTime();
+      const duration = (horaFin - horaInicio) / (1000 * 60 * 60); // Convertir a horas
+
+      //return duration >= 2 || horario.materia_id === "1155108";
+      return duration >= 2;
+    });
+
+    // Filtrar los horarios por materiaId
+    const filteredHorarios = horariosValidos.filter(horario => horario.materia_id === materiaId);
+    
+    // Devolver los horarios filtrados en formato JSON
+    res.json({ horarios: filteredHorarios });
+  } catch (error) {
+    console.error("Error al obtener los horarios:", error);
+    res.status(500).send("Error interno del servidor.");
+  }
+});
+
+// Horarios Válidos para Previos
+router.get("/horarios_validos", async (req, res) => {
+  try {
+    // Filtrar los horarios válidos
+    const horariosValidos = horarios.filter(horario => {
+      const horaInicio = new Date(`2024-01-01T${horario.hora_inicio}`).getTime();
+      const horaFin = new Date(`2024-01-01T${horario.hora_fin}`).getTime();
+      const duration = (horaFin - horaInicio) / (1000 * 60 * 60); // Convertir a horas
+
+      //return duration >= 2 || horario.materia_id === "1155108";
+      return duration >= 2;
+    });
+
+    res.json({ horarios: horariosValidos });
+    //console.log(horariosValidos);
+    //console.log("Horarios válidos filtrados correctamente.");
+  } catch (error) {
+    console.error("Error en el endpoint /horarios_validos:", error);
     res.status(500).send("Error interno del servidor.");
   }
 });
@@ -257,163 +275,77 @@ router.get("/semestres", (req, res) => {
   }
 });
 
-//Horarios Validos para Previos
-router.get("/horario", async (req, res) => {
+router.get("/grupos", (req, res) => {
   try {
-    const query = `
-      SELECT * FROM Horario WHERE hora_fin - hora_inicio >= 2 OR materia_id = 1155108;
-    `;
-
-    const [rows] = await pool.query(query);
-
-    res.json({ horarios: rows });
-    console.log(rows);
-    console.log("Comando ejecutado correctamente en la base de datos.");
+    const gruposData = fs.readFileSync("./src/JSON/grupos.json", "utf8");
+    const gruposJson = JSON.parse(gruposData);
+    grupos = gruposJson.grupos;
+    res.json(gruposJson);
   } catch (error) {
-    console.error("Error en el endpoint /getHorario:", error);
-    res.status(500).send("Error interno del servidor.");
+    console.error("Error al leer el archivo .json", error);
+    res.status(500).json({ error: "Error al leer el archivo grupos.json" });
   }
 });
 
-router.get("/horario/:materiaId", async (req, res) => {
-  try {
-    const materiaId = req.params.materiaId;
-    const query = `
-      SELECT id, grupo_id, dia, hora_inicio, hora_fin, salon
-      FROM Horario
-      WHERE materia_id = ? AND hora_fin - hora_inicio >= 2 OR materia_id = 1155108;
-    `;
-    const [horarios] = await pool.query(query, [materiaId]);
-    res.json({ horarios });
-    console.log(horarios);
-  } catch (error) {
-    console.error("Error al obtener los horarios:", error);
-    res.status(500).send("Error interno del servidor.");
-  }
-});
+router.get("/holidays_dates", (req, res) => {
+  const holidayDates = holidays.map((holiday) => holiday.date);
 
-router.post("/generate_pdf", (req, res) => {});
+  res.json({
+    status: "Success",
+    holidayDates: holidayDates,
+  });
+});
 
 router.get("/seleccionar-aleatorio", async (req, res) => {
   try {
-    // Obtener todas las combinaciones únicas de materia_id y grupo_id desde la tabla Materia_grupo
-    const combinacionesQuery = `
-      SELECT DISTINCT materia_id, grupo_id
-      FROM Materia_grupo;
-    `;
+    const gruposData = fs.readFileSync("./src/JSON/grupos.json", "utf8");
+    const gruposJson = JSON.parse(gruposData);
+    grupos = gruposJson.grupos;
 
-    const [combinaciones] = await pool.query(combinacionesQuery);
-
+    // Crear un mapa para almacenar los horarios seleccionados
     const horariosSeleccionados = new Map();
 
-    // Iterar sobre las combinaciones únicas de materia_id e id_grupo
-    for (const combinacion of combinaciones) {
-      const { materia_id, grupo_id } = combinacion;
-
-      // Obtener todos los horarios válidos para la materia y grupo actual
-      const horariosQuery = `
-        SELECT *
-        FROM Horario
-        WHERE materia_id = ? AND grupo_id = ? AND hora_fin - hora_inicio >= 2;
-      `;
-
-      const [horarios] = await pool.query(horariosQuery, [
-        materia_id,
-        grupo_id,
-      ]);
-
-      // Si hay horarios disponibles, seleccionar aleatoriamente uno
-      if (horarios.length > 0) {
-        const horarioSeleccionado =
-          horarios[Math.floor(Math.random() * horarios.length)];
-
-        // Agregar el horario seleccionado al mapa
-        horariosSeleccionados.set(
-          `${materia_id}-${grupo_id}`,
-          horarioSeleccionado
+    // Iterar sobre cada materia
+    for (const materia of materias) {
+      // Iterar sobre cada grupo para la materia actual
+      for (const grupo of grupos) {
+        // Filtrar los horarios válidos para la materia y el grupo actual
+        const horariosValidos = horarios.filter((horario) => {
+        const horaInicio = new Date(`2024-01-01T${horario.hora_inicio}`).getTime();
+        const horaFin = new Date(`2024-01-01T${horario.hora_fin}`).getTime();
+        const duration = (horaFin - horaInicio) / (1000 * 60 * 60);
+        
+        return (
+          horario.materia_id === materia.id &&
+          horario.grupo_id === grupo &&
+          duration >= 2
         );
+      });
+
+        // Si hay horarios válidos, seleccionar aleatoriamente uno
+        if (horariosValidos.length > 0) {
+          const horarioSeleccionado =
+            horariosValidos[Math.floor(Math.random() * horariosValidos.length)];
+
+          // Agregar el horario seleccionado al mapa
+          horariosSeleccionados.set(
+            `${materia.id}-${grupo}`,
+            horarioSeleccionado
+          );
+        } else {
+          break;
+        }
       }
     }
 
-    const horariosSeleccionadosArray = Array.from(
-      horariosSeleccionados.values()
-    );
+    // Convertir los horarios seleccionados en un array
+    const horariosSeleccionadosArray = Array.from(horariosSeleccionados.values());
 
-    // Insertar los horarios seleccionados en la tabla Seleccionar
-    for (const horario of horariosSeleccionadosArray) {
-      const insertSeleccionQuery = `
-        INSERT INTO Seleccionar (horario_id, materia_id, grupo_id, dia, hora_inicio, hora_fin, salon) VALUES (?, ?, ?, ?, ?, ?, ?);
-        `;
-
-      try {
-        await pool.query(insertSeleccionQuery, [
-          horario.id,
-          horario.materia_id,
-          horario.grupo_id,
-          horario.dia,
-          horario.hora_inicio,
-          horario.hora_fin,
-          horario.salon,
-        ]);
-      } catch (error) {}
-    }
-
+    // Responder con los horarios seleccionados
     res.json({ horarios: horariosSeleccionadosArray });
-    //res.status(200).send("Horarios seleccionados aleatoriamente y guardados correctamente.");
   } catch (error) {
     console.error("Error en el endpoint /seleccionar-aleatorio:", error);
     res.status(500).send("Error interno del servidor.");
-  }
-});
-
-router.post("/reset-horario", async (req, res) => {
-  try {
-    // Ejecutar la consulta para eliminar todos los datos de la tabla "Horario"
-    await pool.query("DELETE FROM Horario WHERE id > 0");
-    // Ejecutar la consulta para resetear el contador de identidad (id) en la tabla "Horario"
-    await pool.query("ALTER TABLE Horario AUTO_INCREMENT = 1");
-
-    // Responder con un mensaje de éxito
-    res.json({
-      status: "Success",
-      message: "Datos eliminados de la tabla 'Horario' y contador de identidad reseteado correctamente."
-    });
-  } catch (error) {
-    console.error("Error al resetear la tabla 'Horario':", error);
-    res.status(500).json({ status: "Error", message: "Error interno del servidor." });
-  }
-});
-
-
-router.post("/reset-materiagrupo", async (req, res) => {
-  try {
-    // Ejecutar la consulta para eliminar todos los datos de la tabla "Materia_grupo"
-    await pool.query("DELETE FROM Materia_grupo WHERE materia_id > 0");
-
-    // Responder con un mensaje de éxito
-    res.json({
-      status: "Success",
-      message: "Datos eliminados de la tabla 'Materia_grupo' y contador de identidad reseteado correctamente."
-    });
-  } catch (error) {
-    console.error("Error al resetear la tabla 'Materia_grupo':", error);
-    res.status(500).json({ status: "Error", message: "Error interno del servidor." });
-  }
-});
-
-router.post("/reset-materia", async (req, res) => {
-  try {
-    // Ejecutar la consulta para eliminar todos los datos de la tabla "Materia"
-    await pool.query("DELETE FROM Materia WHERE id > 0");
-
-    // Responder con un mensaje de éxito
-    res.json({
-      status: "Success",
-      message: "Datos eliminados de la tabla 'Materia' y contador de identidad reseteado correctamente."
-    });
-  } catch (error) {
-    console.error("Error al resetear la tabla 'Materia':", error);
-    res.status(500).json({ status: "Error", message: "Error interno del servidor." });
   }
 });
 
